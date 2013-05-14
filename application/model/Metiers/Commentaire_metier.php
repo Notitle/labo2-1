@@ -50,7 +50,7 @@ class Commentaire_metier extends Generic_metiers implements Metier_interface {
 
     public function setUtilisateur($user) {
         try {
-            $this->idDataValid("utilisateur");
+            $this->idDataValid("utilisateur",$user);
             $this->utilisateur = $user;
         } catch (Exception $e) {
             $e->getMessage();
