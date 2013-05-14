@@ -16,8 +16,8 @@ class Task_DAO {
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
         
         foreach ( $stmt as $key => $row){
-            $this->task_Liste[$row["id"]] = new tache_metier();
-            $this->task_Liste[$row["id"]]->popule($row);
+            $this->task_Liste[$row["id"]] = new Task_metier();
+            $this->task_Liste[$row["id"]]->Popule($row);
         }
     }
 }
