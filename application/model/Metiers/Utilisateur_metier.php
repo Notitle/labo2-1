@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Classe reprennant l'utilisateur_metier
  *
@@ -12,6 +13,14 @@ class Utilisateur_metier extends Generic_metiers implements Metier_interface {
     private $password;
     private $email;
 
+    /**
+     * Function construct
+     * @param string $identifiant - identifiant de l'user
+     * @param string $nom - nom de l'user
+     * @param string $prenom - prénom de l'user
+     * @param string $password - password de l'user
+     * @param string $email - email de l'user
+     */
     public function __construct($identifiant = null, $nom = null, $prenom = null, $password = null, $email = null) {
         $this->identifiant = $identifiant;
         $this->nom = $nom;
@@ -28,7 +37,6 @@ class Utilisateur_metier extends Generic_metiers implements Metier_interface {
         $this->identifiant = $id;
     }
 
-    
     public function getNom() {
         return $this->nom;
     }
@@ -37,7 +45,6 @@ class Utilisateur_metier extends Generic_metiers implements Metier_interface {
         $this->identifiant = $name;
     }
 
-    
     public function getPrenom() {
         return $this->prenom;
     }
@@ -45,23 +52,23 @@ class Utilisateur_metier extends Generic_metiers implements Metier_interface {
     public function setPrenom($prenom) {
         $this->prenom = $prenom;
     }
-    
-    
+
     public function getPassword() {
         return $this->password;
     }
-    
-    public function setPassword($pwd){
-        $this->password=$pwd;
+
+    public function setPassword($pwd) {
+        $this->password = $pwd;
     }
-    
+
     public function getEmail() {
         return $this->email;
     }
-    
-    public function setEmail($mail){
-        $this->email=$mail;
+
+    public function setEmail($mail) {
+        $this->email = $mail;
     }
+
 }
 
 ?>
