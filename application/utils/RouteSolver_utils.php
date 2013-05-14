@@ -26,62 +26,55 @@ class RouteSolver_utils
     {
         $this->url = $url;
         $this->config = Application::getConfigPath();
-
         $query = explode("/", $this->url);
 
         if (isset($query[0]) && $query[0] != "")
         {
+            //Un controller a été demandé : 
             $nomController = $query[0] . "_controller";
             $this->controller = new $nomController();
             $path = $this->config["base"] . "/" . $this->config["controller"] . "/" . $nomController . ".php";
             if (!is_file($path))
             {
-                throw new controllerNotFound_exception();
+                //Le controller n'existe pas, on retourne une exception;
+                throw new ControllerNotFound_exception($path);
             }
         }
         else
         {
+            //aucun controller n'a été demandé: envoi du controller par défaut
             $config = Application::getConfigMVC();
             $this->controller = new $config["default_controller"]();
         }
 
         if (isset($query[1]) && $query[1] != "")
         {
+            //Une action a été demandée: 
             if (method_exists($this->getController(), $query[1]))
             {
+                //L'action demandée existe: 
                 $this->action = $query[1];
                 $path = $this->config["base"] . "/" . $this->config["vue"] . "/" . $query[0] . "/" . $this->action . ".phtml";
                 if (!is_file($path))
                 {
-                    throw new vueNotFound_exception($path);
+                    //Le fichier de vue lié à l'action n'existe pas
+                    throw new VueNotFound_exception($path);
                 }
             }
             else
             {
-                throw new ControllerUnknowAction_exception();
+                //L'action demandée n'existe pas
+                throw new ControllerUnknownAction_exception($this->action);
             }
         }
         else
         {
-            $config = Application::getConfigMVC();
-            if (method_exists($this->getController(), $config["default_action"]))
-            {
-                $this->action = $config["default_action"];
-                $path = $this->config["base"] . "/" . $this->config["vue"] . "/" . $query[0] . "/" . $this->action . ".phtml";
-                if (!is_file($path))
-                {
-                    throw new vueNotFound_exception($path);
-                }
-            }
-            else
-            {
-                throw new ControllerUnknownAction_exception();
-            }
+            //Aucune action n'a été demandée: Envoi de l'action par défaut du controller
+            $this->action = "defaultAction";
         }
         if (isset($query[2]))
         {
-            $rAction = new ReflectionMethod($this->getController(), $this->getAction());
-            $params = array_slice($query, 2, $rAction->getNumberOfParameters());
+            $params = array_splice($query, 0, 2);
             $this->params = $params;
         }
     }
