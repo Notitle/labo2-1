@@ -6,7 +6,7 @@ class Task_controller implements Controller_onterface {
         $Fdao = new DAO_factory(Application::getConfig("DB"));
         $Cdao = $Fdao->getTaskDao();
         
-        return new View(array(
+        return new View_vue(array(
             "Liste_Taches"=>$Cdao->getTaskList())
         );
     }
