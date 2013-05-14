@@ -18,6 +18,7 @@ class Commentaire_metier extends Generic_metiers implements Metier_interface {
      * @param string $utilisateur - utilisateur ayant commenté
      * @param string $date - date du commentaire
      * @param string $tache - tache commentée
+     * @param string $validationArray - tableau de validation
      */
     public function __construct($commentaire, $utilisateur, $date, $tache) {
         $this->commentaire = $commentaire;
@@ -25,9 +26,12 @@ class Commentaire_metier extends Generic_metiers implements Metier_interface {
         $this->date = $date;
         $this->tache = $tache;
         $this->validationArray = array(
-            "commentaire" => array("required" => true,
-            )
-        );
+            "commentaire" => array("required" => true,"type"=>"string"),
+            "utilisateur" => array("required" => true,"type"=>"string"),
+            "date"=>array("required"=>true,"type"=>"date"),
+            "tache"=>array("required"=>true,"type"=>"string")
+            );
+        
     }
 
     public function getCommentaire() {
