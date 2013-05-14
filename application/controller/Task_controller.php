@@ -10,6 +10,10 @@ class Task_controller implements Controller_onterface {
             "Liste_Taches"=>$Cdao->getTaskList())
         );
     }
+    
+    public function __toString() {
+        return 'Task';
+    }
 }
 
 ?>
