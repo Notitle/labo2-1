@@ -6,8 +6,8 @@
  * @author internet07
  */
 class Length_validateur implements Validateur_interface{
-    private $min=3;
-    private $max=20;
+    private $min;
+    private $max;
     /**
      * fonction construct qui ... ben construit ? wouaip,wouaip elle construit des trucs
      * @param int $max valeur max dans un champs
