@@ -14,6 +14,15 @@ class Task_metier extends Generic_metiers implements Metier_interface {
     private $utilisateur;
     private $commentaire;
 
+    /**
+     * Function construct
+     * @param string $id - id de la tache
+     * @param string $tache - Description de la tache
+     * @param string $date - Instant où la tâche est modifiée
+     * @param string $etat - Etat de la tâche
+     * @param string $utilisateur - Utilisateur de la tâche
+     * @param string $commentaire - Commentaire sur la tâche
+     */
     public function __construct($id, $tache, $date, $etat, $utilisateur, $commentaire) {
         $this->id = $id;
         $this->tache = $tache;
