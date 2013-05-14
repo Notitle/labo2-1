@@ -6,6 +6,11 @@ class Connexion_controller implements Controller_interface
     {
     }
     
+    public function __toString()
+    {
+        return "Connexion";
+    }
+    
     public function defaultAction()
     {
         $this->login();
@@ -14,7 +19,8 @@ class Connexion_controller implements Controller_interface
     
     public function login()
     {
-        echo "Action par défaut";
+        $vue = new View_vue(array());
+        $vue->display($this, "login");
     }
 }
 ?>
