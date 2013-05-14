@@ -1,0 +1,14 @@
+<html>
+    <body>
+        
+        <?php
+        var_dump($this->getDataVue("Liste_Taches"));
+            foreach ($this->getDataVue("Liste_Taches") as $task){
+                 
+                 echo "<br />";
+                 echo $task;
+            }
+
+        ?>
+    </body>
+</html>
