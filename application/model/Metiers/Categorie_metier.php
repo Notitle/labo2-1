@@ -9,15 +9,20 @@ class categorie_metier extends Generic_metiers implements Metier_interface {
 
     private $categorie;
     private $id;
+    private $validationArray;
 
     /**
      * Function construct
      * @param string $categorie - nom de la categorie
      * @param string $id - nom de l'id
      */
-    public function __construct($categorie,$id) {
-        $this->categorie = $categorie;
-        $this->categorie= $id;
+    public function __construct($categorie, $id) {
+        $this->setCategorie($categorie);
+        $this->setId($id);
+        $this->validationArray = array(
+            "categorie" => array("required" => true, "type" => "string"),
+            "id" => array("required" => true, "type" => "integer")
+        );
     }
 
     public function getCategorie() {
@@ -25,7 +30,13 @@ class categorie_metier extends Generic_metiers implements Metier_interface {
     }
 
     public function setCategorie($categ) {
-        $this->categorie = $categ;
+// Passe dans le validateur et prend une exception si erreur
+        try {
+            $this->isDataValid("categorie", $categ);
+            $this->categorie = $categ;
+        } catch (Exception $e) {
+            $e->getMessage();
+        }
     }
 
     public function getId() {
@@ -33,7 +44,12 @@ class categorie_metier extends Generic_metiers implements Metier_interface {
     }
 
     public function setId($id) {
-        $this->id = $id;
+        try {
+            $this->isDataValid("id", $id);
+            $this->id = $id;
+        } catch (Exception $e) {
+            $e->getMessage();
+        }
     }
 
 }

@@ -11,6 +11,7 @@ class Commentaire_metier extends Generic_metiers implements Metier_interface {
     private $utilisateur;
     private $date;
     private $tache;
+    private $validationArray;
 
     /**
      * Function construct
@@ -21,10 +22,10 @@ class Commentaire_metier extends Generic_metiers implements Metier_interface {
      * @param string $validationArray - tableau de validation
      */
     public function __construct($commentaire, $utilisateur, $date, $tache) {
-        $this->commentaire = $commentaire;
-        $this->utilisateur = $utilisateur;
-        $this->date = $date;
-        $this->tache = $tache;
+        $this->setCommentaire($commentaire);
+        $this->setUtilisateur($utilisateur);
+        $this->setDate($date);
+        $this->setTache($tache);
         $this->validationArray = array(
             "commentaire" => array("required" => true,"type"=>"string"),
             "utilisateur" => array("required" => true,"type"=>"string"),
@@ -52,7 +53,7 @@ class Commentaire_metier extends Generic_metiers implements Metier_interface {
         return $this->utilisateur;
     }
 
-    public function setUtilisateur($user) {
+    public function setUtilisateur(Utilisateur_metier $user) {
         try {
             $this->idDataValid("utilisateur",$user);
             $this->utilisateur = $user;
@@ -78,7 +79,7 @@ class Commentaire_metier extends Generic_metiers implements Metier_interface {
         return $this->tache;
     }
 
-    public function setTache($tache) {
+    public function setTache(Task_metier $tache) {
         try {
             $this->isDataValid("tache", $tache);
             $this->tache = $tache;

@@ -12,6 +12,7 @@ class Utilisateur_metier extends Generic_metiers implements Metier_interface {
     private $prenom;
     private $password;
     private $email;
+    private $validationArray;
 
     /**
      * Function construct
@@ -22,11 +23,18 @@ class Utilisateur_metier extends Generic_metiers implements Metier_interface {
      * @param string $email - email de l'user
      */
     public function __construct($identifiant = null, $nom = null, $prenom = null, $password = null, $email = null) {
-        $this->identifiant = $identifiant;
-        $this->nom = $nom;
-        $this->prenom = $prenom;
-        $this->password = $password;
-        $this->email = $email;
+        $this->setIdentifiant($identifiant);
+        $this->setNom = ($nom);
+        $this->setPrenom = ($prenom);
+        $this->setPassword = ($password);
+        $this->setEmail = ($email);
+        $this->validationArray = array(
+            "identifiant" => array("required" => true, "type" => "string"),
+            "nom" => array("required" => true, "type" => "string"),
+            "prenom" => array("required" => true, "type" => "string"),
+            "password" => array("required" => true, "type" => "string"),
+            "email" => array("required" => true, "type" => "string")
+        );
     }
 
     public function getIdentifiant() {
@@ -34,7 +42,13 @@ class Utilisateur_metier extends Generic_metiers implements Metier_interface {
     }
 
     public function setIdentifiant($id) {
-        $this->identifiant = $id;
+        // Passe dans le validateur et prend une exception si erreur
+        try {
+            $this->isDataValid("identifiant", $id);
+            $this->identifiant = $id;
+        } catch (Exception $e) {
+            $e->getMessage();
+        }
     }
 
     public function getNom() {
@@ -42,7 +56,12 @@ class Utilisateur_metier extends Generic_metiers implements Metier_interface {
     }
 
     public function setNom($name) {
-        $this->identifiant = $name;
+        try {
+            $this->isDataValid("nom", $name);
+            $this->identifiant = $name;
+        } catch (Exception $e) {
+            $e->getMessage();
+        }
     }
 
     public function getPrenom() {
@@ -50,7 +69,12 @@ class Utilisateur_metier extends Generic_metiers implements Metier_interface {
     }
 
     public function setPrenom($prenom) {
-        $this->prenom = $prenom;
+        try {
+            $this->isDataValid("prenom", $prenom);
+            $this->prenom = $prenom;
+        } catch (Exception $e) {
+            $e->getMessage();
+        }
     }
 
     public function getPassword() {
@@ -58,7 +82,12 @@ class Utilisateur_metier extends Generic_metiers implements Metier_interface {
     }
 
     public function setPassword($pwd) {
-        $this->password = $pwd;
+        try {
+            $this->isDataValid("password", $pwd);
+            $this->password = $pwd;
+        } catch (Exception $e) {
+            $e->getMessage();
+        }
     }
 
     public function getEmail() {
@@ -66,7 +95,12 @@ class Utilisateur_metier extends Generic_metiers implements Metier_interface {
     }
 
     public function setEmail($mail) {
-        $this->email = $mail;
+        try {
+            $this->isDataValid("email", $mail);
+            $this->email = $mail;
+        } catch (Exception $e) {
+            $e->getMessage();
+        }
     }
 
 }
