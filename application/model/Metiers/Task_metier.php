@@ -13,6 +13,7 @@ class Task_metier extends Generic_metiers implements Metier_interface {
     private $etat;
     private $utilisateur;
     private $commentaire;
+    private $validationArray;
 
     /**
      * Function construct
@@ -30,6 +31,14 @@ class Task_metier extends Generic_metiers implements Metier_interface {
         $this->etat = $etat;
         $this->utilisateur = $utilisateur;
         $this->commentaire = $commentaire;
+        $this->validationArray = array(
+            "id" => array("required" => true, "type" => "string"),
+            "tache" => array("required" => true, "type" => "string"),
+            "date" => array("required" => true, "type" => "date"),
+            "etat" => array("required" => true, "type" => "string"),
+            "utilisateur" => array("required" => true, "type" => "string"),
+            "commentaire" => array("type" => "string")
+        );
     }
 
     public function getId() {
@@ -68,15 +77,15 @@ class Task_metier extends Generic_metiers implements Metier_interface {
         return $this->commentaire;
     }
 
-    public function setUtilisateur($comment) {
-        $this->commentaire = $comment;
+    public function setUtilisateur(Utilisateur_metier $user) {
+        $this->commentaire = $user;
     }
 
     public function getCommentaire() {
         return $this->commentaire;
     }
 
-    public function setCommentaire($comment) {
+    public function setCommentaire(Commentaire_metier $comment) {
         $this->commentaire = $comment;
     }
 
