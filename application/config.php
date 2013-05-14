@@ -21,7 +21,7 @@ $config = array(
         "DB" => "labo2"
     ),
     "MVC" => array(
-        "default_controller" =>"Connexion",
+        "default_controller" =>"Connexion_controller",
         "default_action" => "login"
     )
 );
