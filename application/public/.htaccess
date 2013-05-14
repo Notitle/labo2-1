@@ -1,0 +1,9 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /MVC
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    #RewriteRule ^(.*)/(.*)/(.*)$ index.php?controller=$1&action=$2&id=$3 [QSA,L]
+    #RewriteRule ^(.*)/(.*)$ index.php?controller=$1&action=$2 [QSA,L]
+    RewriteRule ^(.*)$ index.php?query=$1 [QSA,L]
+</IfModule>
