@@ -19,7 +19,6 @@ class Regex_validateur implements Validateur_interface{
      * fonction qui renvoie une exception si la chaine
      * ne correspond pas aux regexS
      * @param string $valeur valeur max dans un champs
-     * @param int $min valeur min dans un champs
      * @throws OutOfRange_validateur_exception
      */
     protected function valide($valeur){
