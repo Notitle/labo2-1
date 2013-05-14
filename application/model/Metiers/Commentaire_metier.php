@@ -10,6 +10,12 @@ class Commentaire_metier extends Generic_metiers implements Metier_interface {
     private $commentaire;
     private $utilisateur;
 
+    /**
+     * Function construct
+     * @param string $commentaire - commentaire
+     * @param string $utilisateur - utilisateur ayant commenté
+     */
+    
     public function __construct($commentaire, $utilisateur) {
         $this->commentaire = $commentaire;
         $this->utilisateur = $utilisateur;

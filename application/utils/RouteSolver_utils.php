@@ -45,7 +45,7 @@ class RouteSolver_utils
             $this->controller = new $config["default_controller"]();
         }
 
-        if (isset($query[1]))
+        if (isset($query[1]) && $query[1] != "")
         {
             if (method_exists($this->getController(), $query[1]))
             {
@@ -53,7 +53,7 @@ class RouteSolver_utils
                 $path = $this->config["base"] . "/" . $this->config["vue"] . "/" . $query[0] . "/" . $this->action . ".phtml";
                 if (!is_file($path))
                 {
-                    throw new vueNotFound_exception();
+                    throw new vueNotFound_exception($path);
                 }
             }
             else
@@ -67,6 +67,11 @@ class RouteSolver_utils
             if (method_exists($this->getController(), $config["default_action"]))
             {
                 $this->action = $config["default_action"];
+                $path = $this->config["base"] . "/" . $this->config["vue"] . "/" . $query[0] . "/" . $this->action . ".phtml";
+                if (!is_file($path))
+                {
+                    throw new vueNotFound_exception($path);
+                }
             }
             else
             {
