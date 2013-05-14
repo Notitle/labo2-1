@@ -26,9 +26,11 @@ class Length_validateur implements Validateur_interface{
      */
     
     public function valide($valeur) {
-        if ($this->min > $valeur ||$this->max<$valeur) {
-            throw new OutOfRange_validateur_exception("erreur de outofrange ");
-        }        
+        $length = strlen(''.$valeur);
+        if($length<$this->min)
+            throw new OutOfRange_validateur_exception('La chaine "'.$valeur.'" doit contenir plus de '.$valeur->min.' caractère(s)', array($valeur, $this->min));
+        if($$length>$this->max)
+            throw new OutOfRange_validateur_exception('La chaine "'.$valeur.'" doit contenir moins de '.$valeur->max.' caractère(s)', array($valeur, $this->max));          
    } 
 }
 ?>
