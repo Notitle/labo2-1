@@ -32,6 +32,7 @@ class User_DAO{
         return $this->user_liste;   
     }
     
+
     public function getUserByLogin($login){
         if(!isset($this->user_liste[$login])){
             $query='SELECT * FROM user where use_login=:a';
@@ -46,6 +47,5 @@ class User_DAO{
         return $this->user_liste[$login];
     }
     
-  
-}
+  }
 ?>
