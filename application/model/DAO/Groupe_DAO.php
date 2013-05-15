@@ -1,6 +1,14 @@
 <?php
-
+/**
+ * Description of Phase_DAO
+ *
+ * @author Rodo/sarah
+ */
 class Group_DAO{
+    /**
+     *
+     * @var tableau des groupes Group_liste 
+     */
     private $dao;
     private $Group_liste = array();
             
@@ -19,6 +27,25 @@ class Group_DAO{
         }
         return $this->Group_liste;
     }
+    
+        public function getGroupById($id){
+
+        if (!isset($this->Group_liste[$id]))
+        {
+
+            $query = '
+                    SELECT *
+                    FROM group
+                    WHERE gro_id = :a';
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute(array(":a" => $id));
+            $stmt->setFetchMode(PDO::FETCH_ASSOC); //tableau associatif dna sla cariable $stmt
+            $row = $stmt->fetch();
+            $this->Group_liste[$id] = new Groupe_metier($row['gro_id'], $row['gro_name']);
+        }
+        return $this->Group_liste[$id];
+    }
+
 }
 
 ?>
