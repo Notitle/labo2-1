@@ -31,5 +31,11 @@ class User_DAO{
         }
         return $this->user_liste;   
     }
+    
+    
+    public function getUserByLogin($login)
+    {
+        //TODO
+    }
 }
 ?>

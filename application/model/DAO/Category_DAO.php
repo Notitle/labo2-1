@@ -20,7 +20,7 @@ class Category_DAO {
      * requete de slection des cat
      * @return tableau de cat
      */
-    public function getTaskList() {
+    public function getCategoryList() {
         $sql = 'Select cat_id as id, cat_name as nom, cat_parent as parent, cat_deleted as suppression from category';
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
