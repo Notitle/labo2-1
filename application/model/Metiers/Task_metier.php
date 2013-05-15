@@ -5,15 +5,15 @@
  *
  * @author sarah
  */
-class Task_metier extends Generic_metiers implements Metier_interface {
+class Task_metier extends Generic_metier {
 
     private $id;
     private $tache;
     private $date;
+    private $categorie;
     private $etat;
     private $utilisateur;
     private $commentaire;
-    private $validationArray;
 
     /**
      * Function construct
@@ -24,20 +24,21 @@ class Task_metier extends Generic_metiers implements Metier_interface {
      * @param string $utilisateur - Utilisateur de la tâche
      * @param string $commentaire - Commentaire sur la tâche
      */
-    public function __construct($id, $tache, $date, $etat, $utilisateur, $commentaire) {
+    public function __construct($id, $tache, $date,$categorie) {
         $this->setId($id);
         $this->setTache($tache);
         $this->setDate($date);
-        $this->setEtat($etat);
+        $this->categorie = $categorie;
+       /* $this->setEtat($etat);
         $this->setUtilisateur($utilisateur);
-        $this->setCommentaire($commentaire);
+        $this->setCommentaire($commentaire);*/
         $this->validationArray = array(
             "id" => array("required" => true, "type" => "string"),
             "tache" => array("required" => true, "type" => "string"),
             "date" => array("required" => true, "type" => "date"),
-            "etat" => array("required" => true, "type" => "string"),
+            /*"etat" => array("required" => true, "type" => "string"),
             "utilisateur" => array("required" => true, "type" => "string"),
-            "commentaire" => array("type" => "string")
+            "commentaire" => array("type" => "string")*/
         );
     }
 

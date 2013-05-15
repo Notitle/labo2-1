@@ -5,7 +5,7 @@
  *
  * @author sarah
  */
-class Utilisateur_metier extends Generic_metiers implements Metier_interface {
+class Utilisateur_metier extends Generic_metier {
 
     private $identifiant;
     private $nom;

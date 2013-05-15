@@ -5,7 +5,7 @@
  *
  * @author sarah
  */
-class Commentaire_metier extends Generic_metiers implements Metier_interface {
+class Commentaire_metier extends Generic_metier {
 
     private $commentaire;
     private $utilisateur;

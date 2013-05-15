@@ -5,7 +5,7 @@
  *
  * @author sarah
  */
-class categorie_metier extends Generic_metiers implements Metier_interface {
+class categorie_metier extends Generic_metier {
 
     private $categorie;
     private $id;

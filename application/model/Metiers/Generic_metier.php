@@ -3,7 +3,7 @@
 /**
  * Classe abstraite qui contient les fonctions de validateurs nécéssaires à l'insersions de données dans une classe métier. 
  */
-abstract class Generic_metiers
+abstract class Generic_metier implements Metier_interface
 {
 
     /**
