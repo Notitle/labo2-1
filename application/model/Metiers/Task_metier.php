@@ -25,12 +25,12 @@ class Task_metier extends Generic_metiers implements Metier_interface {
      * @param string $commentaire - Commentaire sur la tâche
      */
     public function __construct($id, $tache, $date, $etat, $utilisateur, $commentaire) {
-        $this->id = $id;
-        $this->tache = $tache;
-        $this->date = $date;
-        $this->etat = $etat;
-        $this->utilisateur = $utilisateur;
-        $this->commentaire = $commentaire;
+        $this->setId($id);
+        $this->setTache($tache);
+        $this->setDate($date);
+        $this->setEtat($etat);
+        $this->setUtilisateur($utilisateur);
+        $this->setCommentaire($commentaire);
         $this->validationArray = array(
             "id" => array("required" => true, "type" => "string"),
             "tache" => array("required" => true, "type" => "string"),
