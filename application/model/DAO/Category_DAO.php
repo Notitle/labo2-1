@@ -31,6 +31,22 @@ class Category_DAO {
         }
         return $this->Category_Liste;
     }
+    
+        public function getCategoryById($id) {
+        if (!isset($this->Category_liste[$id])) {
+
+            $query = '
+                    SELECT *
+                    FROM phase
+                    WHERE cat_id = :a';
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute(array(":a" => $id));
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $row = $stmt->fetch();
+            $this->Category_liste[$id] = new categorie_metier($row['cat_id'], $row['cat_name'], $row['cat_parent'], $row['cat_deleted']);
+        }
+        return $this->Category_liste[$id];
+    }
 
 }
 

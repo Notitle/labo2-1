@@ -65,6 +65,25 @@ class History_DAO
         return $return;
     }
 
+    public function getHistoryById($id)
+    {
+        if (!isset($this->History_liste[$id]))
+        {
+
+            $query = '
+                    SELECT *
+                    FROM history
+                    WHERE his_id = :a';
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute(array(":a" => $id));
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $row = $stmt->fetch();
+            $this->History_liste[$id] = new History_metier
+                    ($row['his_id'], $row['his_task_fk'], $row['his_time'], $row['his_description'], $row['his_comment'], $row['his_state'], $row['his_user_fk'], $row['his_blocking_fk']);
+        }
+        return $this->History_liste[$id];
+    }
+
 }
 ?>
 

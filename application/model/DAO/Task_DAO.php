@@ -1,7 +1,8 @@
 <?php
-
 /**
- * ET LES COMMENTAIRES Cest pour qui ? HEIN ? ON CHERCHE QUOI ? LES COMMENTS ??
+ * Classe reprennant categorie_metier
+ *
+ * @author rodo/loic
  */
 class Task_DAO
 {
