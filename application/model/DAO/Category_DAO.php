@@ -37,7 +37,7 @@ class Category_DAO {
 
             $query = '
                     SELECT *
-                    FROM phase
+                    FROM category
                     WHERE cat_id = :a';
             $stmt = $this->pdo->prepare($query);
             $stmt->execute(array(":a" => $id));
@@ -46,6 +46,14 @@ class Category_DAO {
             $this->Category_liste[$id] = new categorie_metier($row['cat_id'], $row['cat_name'], $row['cat_parent'], $row['cat_deleted']);
         }
         return $this->Category_liste[$id];
+    }
+    
+    public function getParentCategory($idParent){
+            $sql='SELECT cat_parent FROM category';
+            $stmt=$this->pdo->prepare($sql);
+            $stmt->execute();
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        
     }
 
 }

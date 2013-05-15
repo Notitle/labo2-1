@@ -9,6 +9,7 @@ class categorie_metier extends Generic_metier {
 
     private $categorie;
     private $id;
+    private $parentId;
     private $validationArray;
 
     /**
