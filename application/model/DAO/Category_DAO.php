@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Description of Category_DAO
  * 
@@ -7,15 +8,17 @@
  * @author Jerome
  */
 class Category_DAO {
+
     /**
      *
      * @var tableau des categories $Category_Liste 
      */
     private $Category_Liste = array();
-    
+
     public function __construct(MyPDO_DAO $mpdo) {
         $this->pdo = $mpdo;
     }
+
     /**
      * requete de slection des cat
      * @return tableau de cat
@@ -31,8 +34,8 @@ class Category_DAO {
         }
         return $this->Category_Liste;
     }
-    
-        public function getCategoryById($id) {
+
+    public function getCategoryById($id) {
         if (!isset($this->Category_liste[$id])) {
 
             $query = '
@@ -55,6 +58,30 @@ class Category_DAO {
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
         
     }
+
+    public function setCategory(categorie_metier $cm) {
+        if ($cm->id != 0) {
+            $categorie = $this->PDO->prepare("UPDATE category SET can_name=:n, can_parent=:p, cat_deleted=:d WHERE cat_id=:a");
+            $categorie->execute(array(':a' => $cm->id, ':n' => $cm->name, ':p' => $cm->parent, ':d' => $cm->deleted));
+            $this->Category_Liste[$cm->id] = $cm;
+        } else {
+            $categorie = $this->PDO->prepare("INSERT INTO category (cat_name,cat_parent,cat_deleted) VALUES (:n,:p,:d,:s) WHERE cat_id=:a");
+            $categorie->execute(array(':a' => $cm->id, ':n' => $cm->name, ':p' => $cm->parent, ':d' => $cm->deleted));
+            $this->Category_Liste[$cm->id] = $cm;
+        }
+    }
+    
+    public function deleteCategory ($id){
+         if(isset ($this->Category_Liste[$id])){
+             unset($this->Category_Liste[$id]);
+         }
+         else{
+             return "La catégorie n'existe pas, pécore ! encore un coup de Ralph ca !";
+         }
+         $categorie=$this->PDO->prepare("UPDATE category SET cat_deleted=1 WHERE cat_id=:a" );
+         $categorie->execute(array(':a'=>$id));
+    }
+            
 
 }
 
