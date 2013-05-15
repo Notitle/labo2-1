@@ -24,10 +24,10 @@ class Utilisateur_metier extends Generic_metiers implements Metier_interface {
      */
     public function __construct($identifiant = null, $nom = null, $prenom = null, $password = null, $email = null) {
         $this->setIdentifiant($identifiant);
-        $this->setNom = ($nom);
-        $this->setPrenom = ($prenom);
-        $this->setPassword = ($password);
-        $this->setEmail = ($email);
+        $this->setNom($nom);
+        $this->setPrenom($prenom);
+        $this->setPassword($password);
+        $this->setEmail($email);
         $this->validationArray = array(
             "identifiant" => array("required" => true, "type" => "string"),
             "nom" => array("required" => true, "type" => "string"),
