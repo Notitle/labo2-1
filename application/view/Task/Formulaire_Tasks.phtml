@@ -1,0 +1,40 @@
+
+<html>
+    <head>
+
+        <title><?php //echo $titre;   ?></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" href="/MVC/css/style.css" />
+
+
+    </head>
+    <body>
+        <div id="contain">
+            <div id="form_taches">
+                <h3>Encodez Une tâche</h3>
+                <form action="" method="post">
+                    <table>
+                        <tr>
+                            <td>Description </td>  <td> <input type="text" maxlength="50" name="dsc"> </td>
+                        </tr>
+
+                        <tr>
+                            <td>phase </td>  
+                            <td>  
+                                <SELECT name="nom" size="1">
+                                    <?php
+                                        //echo '<OPTION>'..'<OPTION>'; // foreach sur liste des phases
+                                    ?>
+                                </SELECT>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td> <input  type="submit" value="Validez"  />  </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
