@@ -7,6 +7,8 @@
 class Application
 {
 
+    private $dao_factory;
+
     /**
      * L'application lancée
      * @var Application
@@ -18,6 +20,7 @@ class Application
      * @var Array 
      */
     private $config;
+
     /**
      * Le tableau des permissions
      * @var Array 
@@ -42,12 +45,11 @@ class Application
         new Application();
         require_once $url;
         self::$app->config = &$config;
+
         require_once self::$app->config['PATH']['base'] . "/" . self::$app->config['PATH']['utils'] . '/Autoloader.php';
         /*
          * Chargement de l'autoloader
          */
-
-
         return self::$app;
     }
 
@@ -57,6 +59,8 @@ class Application
     public function run()
     {
         $a = new Autoloader(self::$app->config['PATH']);
+        self::$app->dao_factory = new DAO_factory(Application::getConfigDb());
+
         $query = isset($_GET['query']) ? $_GET['query'] : "";
         $rs = new RouteSolver_utils($query);
         $controller = $rs->getController();
@@ -90,7 +94,7 @@ class Application
     {
         return self::$app->config['MVC'];
     }
-    
+
     /**
      * Retourne les permissions
      * @return Array
@@ -98,6 +102,11 @@ class Application
     public static function getPermissions()
     {
         return self::$app->permissions;
+    }
+
+    public static function getDAOFactory()
+    {
+        return self::$app->dao_factory;
     }
 
 }
