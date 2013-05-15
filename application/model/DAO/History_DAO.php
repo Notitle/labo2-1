@@ -1,26 +1,44 @@
 <?php
 
-class History_DAO{
+class History_DAO {
+
     private $dao;
     private $History_liste = array();
-            
-        public function __construct(MyPDO_DAO $mpdo) { 
+
+    public function __construct(MyPDO_DAO $mpdo) {
         $this->pdo = $mpdo;
-        
     }
-    
-    public function getHistoryList(){
+
+    public function getHistoryList() {
         $sql = 'SELECT his_id, his_task_fk, his_time, his_description, his_comment, 
             his_state, his_user_fk, his_blocking_fk FROM history';
         $result = $this->pdo->prepare($sql);
         $result->setFetchMode(PDO::FETCH_ASSOC);
-        
-        foreach ( $result as $key => $row){
-            $this->History_liste["his_id"] = new History_metier($row['his_id'], $row['his_task_fk'], $row['his_time'],
-                    $row['his_description'], $row['his_comment'], $row['his_state'], $row['his_user_fk'], $row['his_blocking_fk']);
+
+        foreach ($result as $key => $row) {
+            $this->History_liste["his_id"] = new History_metier($row['his_id'], $row['his_task_fk'], $row['his_time'], $row['his_description'], $row['his_comment'], $row['his_state'], $row['his_user_fk'], $row['his_blocking_fk']);
         }
         return $this->History_liste;
     }
+
+    public function getHistoryById($id) {
+        if (!isset($this->History_liste[$id])) {
+
+            $query = '
+                    SELECT *
+                    FROM history
+                    WHERE his_id = :a';
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute(array(":a" => $id));
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $row = $stmt->fetch();
+            $this->History_liste[$id] = new History_metier
+                    ($row['his_id'], $row['his_task_fk'], $row['his_time'], $row['his_description'],
+                    $row['his_comment'], $row['his_state'], $row['his_user_fk'], $row['his_blocking_fk']);
+        }
+        return $this->History_liste[$id];
+    }
+
 }
 ?>
 
