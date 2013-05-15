@@ -2,13 +2,29 @@
 
 class DAO_factory {
     private static $my_pdo;
+    private $Category_dao;
     private $configArray;
     private $Task_dao;
     private $History_dao;
+    private $Project_dao;
+    private $Group_dao;
 
 
     public function __construct($configArray) {
         $this->configArray = $configArray;
+    }
+    
+    public function getCategoryDao() {
+        if (isset($this->Category_dao)) {
+            $c = $this->Category_dao;
+        } else {
+            if (!isset(self::$my_pdo)) {
+                $c = $this->creerMypdo();
+            }
+            $this->Category_dao = new Category_DAO(self::$my_pdo);
+            $c = $this-Category_dao;
+        }
+        return $c;
     }
     
     public function getTaskDao() {
@@ -46,6 +62,19 @@ class DAO_factory {
             }
             $this->Project_dao = new Project_DAO(self::$my_pdo);
             $c = $this->Project_dao;
+        }
+        return $c;
+    }
+    
+     public function getGroupDao() {
+        if (isset($this->Group_dao)) {
+            $c = $this->Group_dao;
+        } else {
+            if (!isset(self::$my_pdo)) {
+                $c = $this->creerMypdo();
+            }
+            $this->Group_dao = new Group_DAO(self::$my_pdo);
+            $c = $this->Group_dao;
         }
         return $c;
     }

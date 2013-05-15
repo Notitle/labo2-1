@@ -29,9 +29,9 @@ class OutOfRange_validateur implements Validateur_interface {
     public function valide($valeur) {
         $length = strlen('' . $valeur);
         if ($length < $this->min)
-            throw new OutOfRange_validateur_exception('La chaine "' . $valeur . '" doit contenir plus de ' . $valeur->min . ' caractère(s)', array($valeur, $this->min));
+            throw new OutOfRange_validateur_exception('La chaine "' . $valeur . '" doit contenir plus de ' . $valeur->min . ' caractère(s)');
         if ($$length > $this->max)
-            throw new OutOfRange_validateur_exception('La chaine "' . $valeur . '" doit contenir moins de ' . $valeur->max . ' caractère(s)', array($valeur, $this->max));
+            throw new OutOfRange_validateur_exception('La chaine "' . $valeur . '" doit contenir moins de ' . $valeur->max . ' caractère(s)');
     }
 
 }
