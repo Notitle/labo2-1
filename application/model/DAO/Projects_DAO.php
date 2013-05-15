@@ -4,7 +4,7 @@
  *
  * @author sarah
  */
-class Project_DAO {
+class Projects_DAO {
 
     /**
      *
@@ -18,7 +18,7 @@ class Project_DAO {
     }
 
     /**
-     * requete de sélection des projets
+     * requete de sélection des projets--
      * @return tableau de projets
      */
     public function getProjectList() {
@@ -33,7 +33,23 @@ class Project_DAO {
         }
         return $this->project_liste;
     }
+    
+        public function getProjectById($id) {
+        if (!isset($this->project_liste[$id])) {
+
+            $query = '
+                    SELECT *
+                    FROM project
+                    WHERE pro_id = :a';
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute(array(":a" => $id));
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $row = $stmt->fetch();
+            $this->project_liste[$id] = new Projet_metier
+                    ($row["pro_id"], $row["pro_name"], $row["pro_category_fk"], $row["pro_deleted"]);
+        }
+        return $this->project_liste[$id];
+    }
 
 }
 ?>
-

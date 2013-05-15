@@ -1,13 +1,32 @@
-<html>
-    <body>
-        
-        <?php
-            foreach ($this->getDataVue("Liste_Taches") as $task){ 
-                 
-                 echo "<br />";
-                 echo $task->getTache();
-            }
 
-        ?>
+<html>
+    <head>
+
+	<title><?php //echo $titre; ?></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" href="/MVC/css/style.css" />
+
+
+    </head>
+    <body>
+        <div id="contain">
+                <div id="taches">
+                    <?php
+
+                        foreach ($this->getDataVue("Liste_Taches") as $task){ 
+                             echo'<p>';
+                             echo'<span id="date">'.$task->getDate().'date</span>';
+                             echo'<br />';
+                             echo $task->getTache();
+                             echo'<br />';
+                             echo '<span id="comments"><a href="#">Commentaires</a></span>';// affiche les commentaires
+                             echo'</p>';
+                             
+                             echo'<hr />';
+                        }
+
+                    ?>
+               </div>
+        </div>
     </body>
 </html>

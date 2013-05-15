@@ -1,0 +1,39 @@
+body{
+    font: 16px Helvetica, arial, freesans, clean, sans-serif;
+}
+
+hr{
+    
+}
+
+
+#contain{
+   
+}
+
+#taches{
+    /*border: 1px solid #AABAB8;
+    border-radius: 5px;*/
+    /*text-align: center;*/
+    padding-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px;
+    
+    
+}
+
+a{
+    color:#4183c4;
+    text-decoration: none;
+}
+
+#date{
+    color: grey;
+    font-style:italic;
+    font-size: 14px;
+}
+
+#comments{
+    font-size: 12px;
+}
