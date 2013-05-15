@@ -11,15 +11,16 @@
     <body>
         <div id="contain">
                 <div id="taches">
+                    <h3>Liste des tâches</h3>
                     <?php
 
                         foreach ($this->getDataVue("Liste_Taches") as $task){ 
                              echo'<p>';
-                             echo'<span id="date">date</span>';
+                             echo'<span id="date">'.$task->getDate().'date</span>';
                              echo'<br />';
                              echo $task->getTache();
                              echo'<br />';
-                             echo '<span id="comments"><a>Commentaires</a></span>';
+                             echo '<span id="comments"><a href="#">Commentaires</a></span>';// affiche les commentaires
                              echo'</p>';
                              
                              echo'<hr />';

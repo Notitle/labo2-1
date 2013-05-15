@@ -13,9 +13,12 @@ class History_metier extends Generic_metier
     private $description;
     private $state;
     private $utilisateurID;
+    private $utilisateur;
     private $date;
     private $tacheID;
+    private $tache;
     private $blockingTaskID;
+    private $blockingTask;
 
     public function __construct($id, $com, $desc, $state, $user, $date, $tache, $blocking)
     {
@@ -27,8 +30,10 @@ class History_metier extends Generic_metier
         $this->setDate($date);
         $this->setTaskID($tache);
         $this->setBlockingTaskID($blocking);
-
-
+        $this->utilisateur = Application::getDAOFactory()->getUserDao()->getUserByLogin($this->utilisateurID);
+        $this->tache=Application::getDAOFactory()->getTaskDao()->getTaskById($this->tacheID);
+        $this->blockingTask=Application::getDAOFactory()->getTaskDao()->getTaskById($this->tacheID);
+        
         $this->validationArray = array(
             "id" => array("required" => true, "type" => "integer"),
             "commentaire" => array("required" => true, "type" => "string"),
@@ -170,8 +175,15 @@ class History_metier extends Generic_metier
     {
         return $this->date;
     }
-
-
+    public function getUser(){
+        return $this->utilisateur;
+    }
+    public function getTask(){
+        return $this->tache;
+    }
+    public function getBlockingTask(){
+        return $this->blockingTask;
+    }
 }
 
 ?>
