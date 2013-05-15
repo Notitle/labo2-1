@@ -15,7 +15,11 @@ class Mail_validateur extends Regex_validateur {
     public function __construct() {
         parent::__construct('#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#');
     }
-
+    /**
+     * 
+     * @param type $valeur
+     * @throws Mail_validateur_exception
+     */
     protected function valide($valeur) {
         parent::valide($valeur);
         if(!preg_match($this->regex,$valeur)) 

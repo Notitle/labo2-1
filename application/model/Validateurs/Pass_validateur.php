@@ -8,7 +8,11 @@ class Pass_validateur extends Regex_validateur {
     public function __construct() {
         parent::__construct('#^(?=.*\d).{4,8}$#');
     }
-
+    /**
+     * 
+     * @param type $valeur
+     * @throws Pass_validateur_exception
+     */
     protected function valide($valeur) {
         parent::valide($valeur);
         if(!preg_match($this->regex,$valeur)) 
