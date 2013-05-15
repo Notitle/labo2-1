@@ -171,10 +171,6 @@ class History_metier extends Generic_metier
         return $this->date;
     }
 
-    public function getId()
-    {
-        return $this->id;
-    }
 
 }
 
