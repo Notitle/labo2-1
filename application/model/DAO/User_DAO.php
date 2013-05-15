@@ -31,5 +31,21 @@ class User_DAO{
         }
         return $this->user_liste;   
     }
+    
+    public function getUserByLogin($login){
+        if(!isset($this->user_liste[$login])){
+            $query='SELECT * FROM user where use_login=:a';
+            $stmt=$this->pdo->prepare($query);
+            $stmt->execute(array(":a"=>$login));
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $row=$stmt->fetch();
+            $this->user_liste[$login]=new Utilisateur_metier(
+                    $row['use_login'],$row['use_firstname'],$row['use_lastname'],
+                    $row['use_email'],$row['use_password'],$row['use_deleted'],$row['use_fk_group']);
+        }
+        return $this->user_liste[$login];
+    }
+    
+  
 }
 ?>
