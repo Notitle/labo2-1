@@ -14,6 +14,8 @@ class Task_metier extends Generic_metier {
     private $etat;
     private $utilisateur;
     private $commentaire;
+    private $history;
+    private $DAO;
 
     /**
      * Function construct
@@ -29,6 +31,7 @@ class Task_metier extends Generic_metier {
         $this->setTache($tache);
         $this->setDate($date);
         $this->categorie = $categorie;
+        $this->history = Application::getDAOFactory()->gethistoryDao()->getHistoryByTask($this);
        /* $this->setEtat($etat);
         $this->setUtilisateur($utilisateur);
         $this->setCommentaire($commentaire);*/
@@ -42,8 +45,14 @@ class Task_metier extends Generic_metier {
         );
     }
 
+    public function save(){
+        if(isset($this->DAO)){
+                $this->DAO->update($this);
+        }
+    }
+    
     public function getId() {
-        return $this->Id;
+        return $this->id;
     }
 
     public function setId($id) {
@@ -77,9 +86,14 @@ class Task_metier extends Generic_metier {
     public function getUtilisateur() {
         return $this->commentaire;
     }
+    
+    public function getHistory()
+    {
+        return $this->history;
+    }
 
     public function setUtilisateur(Utilisateur_metier $user) {
-        $this->commentaire = $user;
+        $this->commentaire = Application::getDAOFactory()->getUserDao()->getUserByLogin($user);
     }
 
     public function getCommentaire() {
