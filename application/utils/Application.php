@@ -18,6 +18,11 @@ class Application
      * @var Array 
      */
     private $config;
+    /**
+     * Le tableau des permissions
+     * @var Array 
+     */
+    private $permissions;
 
     private function __construct()
     {
@@ -67,7 +72,7 @@ class Application
     {
         return self::$app->config['DB'];
     }
-    
+
     /**
      * Retourne la config des URL
      * @return Array
@@ -76,7 +81,7 @@ class Application
     {
         return self::$app->config['PATH'];
     }
-    
+
     /**
      * Retourne la configuration MVC
      * @return Array
@@ -84,6 +89,15 @@ class Application
     public static function getConfigMVC()
     {
         return self::$app->config['MVC'];
+    }
+    
+    /**
+     * Retourne les permissions
+     * @return Array
+     */
+    public static function getPermissions()
+    {
+        return self::$app->permissions;
     }
 
 }
