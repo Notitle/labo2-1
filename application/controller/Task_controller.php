@@ -9,10 +9,10 @@ class Task_controller implements Controller_interface {
         //die("hello");
         $Fdao = new DAO_factory(Application::getConfigDb());
         $Cdao = $Fdao->getTaskDao();
-        
-        return new View_vue(array(
+        $vue =  new View_vue(array(
             "Liste_Taches"=>$Cdao->getTaskList())
         );
+        $vue->display($this, 'liste');
     }
     
     public function __toString() {
