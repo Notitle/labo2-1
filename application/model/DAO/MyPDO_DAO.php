@@ -1,6 +1,8 @@
 
 <?php
 
+
+// création de My PDO -- config du user, pdw, db,...
 class MyPDO_DAO extends PDO{
 
         public function __construct($config){ 
