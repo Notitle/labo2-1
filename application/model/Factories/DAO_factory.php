@@ -36,6 +36,19 @@ class DAO_factory {
         }
         return $c;
     }
+    
+    public function getProjectDao() {
+        if (isset($this->Project_dao)) {
+            $c = $this->Project_dao;
+        } else {
+            if (!isset(self::$my_pdo)) {
+                $c = $this->creerMypdo();
+            }
+            $this->Project_dao = new Project_DAO(self::$my_pdo);
+            $c = $this->Project_dao;
+        }
+        return $c;
+    }
 
     private function creerMypdo() {
 
