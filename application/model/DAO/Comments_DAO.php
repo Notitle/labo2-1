@@ -1,6 +1,6 @@
 <?php
 
-class Task_DAO {
+class Comments_DAO {
     private $dao;
     private $task_Liste =array();
     
@@ -9,7 +9,7 @@ class Task_DAO {
         
     }
     
-    public function getTaskList(){
+    public function getCommentsList(){
         $sql = 'Select tas_id, tas_description, tas_creation, tas_phase_fk from task';
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
@@ -21,5 +21,12 @@ class Task_DAO {
         }
         return $this->task_Liste;
     }
+    
+
+    
+    
 }
 ?>
+
+
+
