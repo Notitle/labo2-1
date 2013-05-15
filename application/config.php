@@ -1,6 +1,8 @@
 <?php
 $config = array(
     "PATH" => array(
+        
+        
         "base" => __DIR__,
         "model" => "model",
         "vue" => "view",
