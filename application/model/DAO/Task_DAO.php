@@ -29,7 +29,7 @@ class Task_DAO
         { // boucle foreach pr parcourir le tableau associatif, utilisation de l'objet instancié à la classe task_metier avec les paramètres correspondants
             if (!isset($this->task_Liste[$row["tas_id"]]))
             {
-                $this->task_Liste[$row["tas_id"]] = new Task_metier($row['tas_id'], $row['tas_description'], $row['tas_creation'], $row['tas_phase_fk']);
+                $this->task_Liste[$row["tas_id"]] = new Task_metier($row['tas_id'], $row['tas_description'], $row['tas_creation'], $row['tas_phase_fk']);       
             }
         }
         return $this->task_Liste; // !! ne pas oublier le return!! ;-)
