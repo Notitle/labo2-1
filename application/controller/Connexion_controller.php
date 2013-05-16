@@ -19,7 +19,7 @@ class Connexion_controller implements Controller_interface
     
     public function login()
     {
-        $liste = Application::getDAOFactory()->getTaskDao()->getTaskById(1)->getCategory();
+        $liste = Application::getDAOFactory()->getUserDAO()->getUserByLogin("nyl");
         var_dump($liste);
         $vue = new View_vue(array());
         $vue->display($this, "login");
