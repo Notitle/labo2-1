@@ -2,7 +2,7 @@
 
 /**
  * Objet de génération de la vue
- * @author loic -
+ * @author loic -*
  */
 class View_vue
 {
