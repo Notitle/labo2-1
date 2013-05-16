@@ -59,7 +59,7 @@ class Phase_DAO {
         }
         
         else{
-            $phase = $this->PDO->prepare("INSERT INTO (pha_name, pha_project_fk) VALUES (:b, :c) WHERE pha_id = :a");
+            $phase = $this->PDO->prepare("INSERT INTO phase (pha_name, pha_project_fk) VALUES (:b, :c) WHERE pha_id = :a");
             $phase->execute(array(':a' => $pm->id, ':b' => $pm->name,':c' => $pm->project_fk));
             $this->phase_liste[$pm->$id] = $pm;
         }
