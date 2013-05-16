@@ -65,7 +65,7 @@ class DAO_factory {
             if (!isset(self::$my_pdo)) {
                 $c = $this->creerMypdo();
             }
-            $this->Project_dao = new Project_DAO(self::$my_pdo);
+            $this->Project_dao = new Projects_DAO(self::$my_pdo);
             $c = $this->Project_dao;
         }
         return $c;
@@ -78,7 +78,7 @@ class DAO_factory {
             if (!isset(self::$my_pdo)) {
                 $c = $this->creerMypdo();
             }
-            $this->Group_dao = new Group_DAO(self::$my_pdo);
+            $this->Group_dao = new Groupe_DAO(self::$my_pdo);
             $c = $this->Group_dao;
         }
         return $c;
@@ -104,8 +104,8 @@ class DAO_factory {
             if(!isset(self::$my_pdo)){
                 $c=$this->creerMypdo();
             }
-            $this->Phase_DAO=new Phase_DAO(self::my_pdo);
-            $c=$this->User_DAO;
+            $this->Phase_DAO=new Phase_DAO(self::$my_pdo);
+            $c=$this->Phase_DAO;
         }
         return $c;
     }

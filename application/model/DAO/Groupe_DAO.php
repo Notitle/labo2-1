@@ -5,7 +5,7 @@
  *
  * @author Rodo/sarah
  */
-class Group_DAO {
+class Groupe_DAO {
 
     /**
      *
@@ -43,7 +43,7 @@ class Group_DAO {
             $query = '
                     SELECT *
                     FROM group
-                    WHERE gro_id = :a';
+                    WHERE gro_id = :a ';
             $stmt = $this->pdo->prepare($query);
             $stmt->execute(array(":a" => $id));
             $stmt->setFetchMode(PDO::FETCH_ASSOC); //tableau associatif dna sla cariable $stmt

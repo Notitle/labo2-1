@@ -5,16 +5,16 @@
  *
  * @author sarah
  */
-class Utilisateur_metier extends Generic_metier {
+class Utilisateur_metier extends Generic_metier
+{
 
     private $identifiant;
     private $nom;
     private $prenom;
     private $password;
     private $email;
-    private $validationArray;
-    
-    
+
+    private $group;
 
     /**
      * Function construct
@@ -24,12 +24,15 @@ class Utilisateur_metier extends Generic_metier {
      * @param string $password - password de l'user
      * @param string $email - email de l'user
      */
-    public function __construct($identifiant = null, $nom = null, $prenom = null, $password = null, $email = null) {
+    public function __construct($identifiant = null, $nom = null, $prenom = null, $email = null, $password = null, $deleted = null, $group = null)
+    {
         $this->setIdentifiant($identifiant);
         $this->setNom($nom);
         $this->setPrenom($prenom);
         $this->setPassword($password);
         $this->setEmail($email);
+        $this->setGroup($group);
+
         $this->validationArray = array(
             "identifiant" => array("required" => true, "type" => "string"),
             "nom" => array("required" => true, "type" => "string"),
@@ -39,70 +42,105 @@ class Utilisateur_metier extends Generic_metier {
         );
     }
 
-    public function getIdentifiant() {
+    public function getIdentifiant()
+    {
         return $this->identifiant;
     }
 
-    public function setIdentifiant($id) {
+    public function setIdentifiant($id)
+    {
         // Passe dans le validateur et prend une exception si erreur
-        try {
+        try
+        {
             $this->isDataValid("identifiant", $id);
             $this->identifiant = $id;
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $e->getMessage();
         }
     }
 
-    public function getNom() {
+    public function getNom()
+    {
         return $this->nom;
     }
 
-    public function setNom($name) {
-        try {
+    public function setNom($name)
+    {
+        try
+        {
             $this->isDataValid("nom", $name);
             $this->identifiant = $name;
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $e->getMessage();
         }
     }
 
-    public function getPrenom() {
+    public function getPrenom()
+    {
         return $this->prenom;
     }
 
-    public function setPrenom($prenom) {
-        try {
+    public function setPrenom($prenom)
+    {
+        try
+        {
             $this->isDataValid("prenom", $prenom);
             $this->prenom = $prenom;
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $e->getMessage();
         }
     }
 
-    public function getPassword() {
+    public function getPassword()
+    {
         return $this->password;
     }
 
-    public function setPassword($pwd) {
-        try {
+    public function setPassword($pwd)
+    {
+        try
+        {
             $this->isDataValid("password", $pwd);
             $this->password = $pwd;
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $e->getMessage();
         }
     }
 
-    public function getEmail() {
+    public function getEmail()
+    {
         return $this->email;
     }
 
-    public function setEmail($mail) {
-        try {
+    public function setEmail($mail)
+    {
+        try
+        {
             $this->isDataValid("email", $mail);
             $this->email = $mail;
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $e->getMessage();
         }
+    }
+
+    public function getGroup()
+    {
+        return $this->group;
+    }
+
+    public function setGroup($group)
+    {
+        $this->group = Application::getDAOFactory()->getGroupDao()->getGroupById($group);
     }
 
 }

@@ -25,7 +25,6 @@ class Categorie_metier extends Generic_metier
         );
         $this->setName($nom);
         $this->setId($id);
-        $this->parentCategory = Application::getDAOFactory()->getCategoryDao()->getCategoryById($parentid);
     }
 
     public function getCategorie()
