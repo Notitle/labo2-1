@@ -36,13 +36,11 @@ class Category_DAO
         }
         return $this->Category_Liste;
     }
-
     /**
-     * Crée un objet Categorie metier à partir de l'id passée. 
+     * select d'une cat via un id
      * @param type $id
      * @return type
      */
-
     public function getCategoryById($id) {
         if (!isset($this->Category_liste[$id])) {
 
@@ -58,27 +56,26 @@ class Category_DAO
         }
         return $this->Category_liste[$id];
     }
-    
-    public function getParentCategory($idParent){
-            $sql='SELECT cat_parent FROM category';
-            $stmt=$this->pdo->prepare($sql);
-            $stmt->execute();
-            $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        
-    }
-
+    /**
+     * modif d'une cat / ajout si n'existe pas
+     * @param categorie_metier $cm
+     */
     public function setCategory(categorie_metier $cm) {
         if ($cm->id != 0) {
-            $categorie = $this->PDO->prepare("UPDATE category SET can_name=:n, can_parent=:p, cat_deleted=:d WHERE cat_id=:a");
-            $categorie->execute(array(':a' => $cm->id, ':n' => $cm->name, ':p' => $cm->parent, ':d' => $cm->deleted));
+            $categorie = $this->PDO->prepare("UPDATE category SET cat_name=:n, cat_parent=:p WHERE cat_id=:a");
+            $categorie->execute(array(':a' => $cm->id, ':n' => $cm->nom, ':p' => $cm->parentCategory));
             $this->Category_Liste[$cm->id] = $cm;
         } else {
-            $categorie = $this->PDO->prepare("INSERT INTO category (cat_name,cat_parent,cat_deleted) VALUES (:n,:p,:d,:s) WHERE cat_id=:a");
-            $categorie->execute(array(':a' => $cm->id, ':n' => $cm->name, ':p' => $cm->parent, ':d' => $cm->deleted));
+            $categorie = $this->PDO->prepare("INSERT INTO category (cat_name,cat_parent) VALUES (:n,:p) WHERE cat_id=:a");
+            $categorie->execute(array(':a' => $cm->id, ':n' => $cm->nom, ':p' => $cm->parentCategory));
             $this->Category_Liste[$cm->id] = $cm;
         }
     }
-    
+    /**
+     * delete d'une cat -> update, la cat ne doit pas etre supprimée dans la BD
+     * @param type $id
+     * @return string
+     */
     public function deleteCategory ($id){
          if(isset ($this->Category_Liste[$id])){
              unset($this->Category_Liste[$id]);
