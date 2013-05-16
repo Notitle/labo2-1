@@ -34,7 +34,11 @@ class Category_DAO {
         }
         return $this->Category_Liste;
     }
-
+    /**
+     * select d'une cat via un id
+     * @param type $id
+     * @return type
+     */
     public function getCategoryById($id) {
         if (!isset($this->Category_liste[$id])) {
 
@@ -50,19 +54,26 @@ class Category_DAO {
         }
         return $this->Category_liste[$id];
     }
-
+    /**
+     * modif d'une cat / ajout si n'existe pas
+     * @param categorie_metier $cm
+     */
     public function setCategory(categorie_metier $cm) {
         if ($cm->id != 0) {
             $categorie = $this->PDO->prepare("UPDATE category SET can_name=:n, can_parent=:p, cat_deleted=:d WHERE cat_id=:a");
             $categorie->execute(array(':a' => $cm->id, ':n' => $cm->name, ':p' => $cm->parent, ':d' => $cm->deleted));
             $this->Category_Liste[$cm->id] = $cm;
         } else {
-            $categorie = $this->PDO->prepare("INSERT INTO category (cat_name,cat_parent,cat_deleted) VALUES (:n,:p,:d,:s) WHERE cat_id=:a");
+            $categorie = $this->PDO->prepare("INSERT INTO category (cat_name,cat_parent,cat_deleted) VALUES (:n,:p,:d) WHERE cat_id=:a");
             $categorie->execute(array(':a' => $cm->id, ':n' => $cm->name, ':p' => $cm->parent, ':d' => $cm->deleted));
             $this->Category_Liste[$cm->id] = $cm;
         }
     }
-    
+    /**
+     * delete d'une cat -> update, la cat ne doit pas etre supprimée dans la BD
+     * @param type $id
+     * @return string
+     */
     public function deleteCategory ($id){
          if(isset ($this->Category_Liste[$id])){
              unset($this->Category_Liste[$id]);
