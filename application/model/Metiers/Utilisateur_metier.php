@@ -146,7 +146,6 @@ class Utilisateur_metier extends Generic_metier
     public function setTask($task){
         $this->task= Application::getDAOFactory()->getTaskDao()->getTaskByUser($task);
     }
-    //qui renvoit un tableau de task metier renvoit une variableeeeee ||| dans taskdao dabord connaitre l'id des taches et apres faire des gettacheparid ds le dao
-}
+ }
 
 ?>
