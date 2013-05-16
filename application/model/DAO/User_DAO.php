@@ -55,14 +55,14 @@ class User_DAO{
      * @param Utilisateur_metier $um
      */
     public function setUser(Utilisateur_metier $um) {
-        if ($um->login != 0) {
-            $utilisateur = $this->PDO->prepare("UPDATE user SET use_login=:a, use_firstname=:p, use_lastname=:l, use_email=:e, use_password=:p,use_deleted=:d, use_fk_group=:g WHERE use_login=:a");
-            $utilisateur->execute(array(':a' => $um->login, ':f' => $um->prenom, ':l' => $um->nom, ':e' => $um->email, ':p' => $um->password, ':d' => $um->deleted, ':g' => $um->group));
-            $this->user_liste[$um->login] = $um;
+        if ($um->identifiant != 0) {//changer
+            $utilisateur = $this->PDO->prepare("UPDATE user SET use_login=:a, use_firstname=:p, use_lastname=:l, use_email=:e, use_password=:p WHERE use_login=:a");
+            $utilisateur->execute(array(':a' => $um->identifiant, ':f' => $um->prenom, ':l' => $um->nom, ':e' => $um->email, ':p' => $um->password));
+            $this->user_liste[$um->identifiant] = $um;
         } else {
-            $utilisateur = $this->PDO->prepare("INSERT INTO category (use_login,use_firstname,use_lastname,use_email,use_password,use_deleted,use_fk_group) VALUES (:a,:f,:l,:e,:p,:d,:g) WHERE use_login=:a");
-            $utilisateur->execute(array(':a' => $um->login, ':f' => $um->prenom, ':l' => $um->nom, ':e' => $um->email, ':p' => $um->password, ':d' => $um->deleted, ':g' => $um->group));
-            $this->user_liste[$um->login] = $um;
+            $utilisateur = $this->PDO->prepare("INSERT INTO category (use_login,use_firstname,use_lastname,use_email,use_password) VALUES (:a,:f,:l,:e,:p) WHERE use_login=:a");
+            $utilisateur->execute(array(':a' => $um->identifiant, ':f' => $um->prenom, ':l' => $um->nom, ':e' => $um->email, ':p' => $um->password));
+            $this->user_liste[$um->identifiant] = $um;
         }
     }
     /**
