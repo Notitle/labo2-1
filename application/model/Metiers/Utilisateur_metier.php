@@ -13,6 +13,8 @@ class Utilisateur_metier extends Generic_metier {
     private $password;
     private $email;
     private $validationArray;
+    
+    
 
     /**
      * Function construct

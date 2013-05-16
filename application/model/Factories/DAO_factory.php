@@ -27,7 +27,7 @@ class DAO_factory {
                 $c = $this->creerMypdo();
             }
             $this->Category_dao = new Category_DAO(self::$my_pdo);
-            $c = $this - Category_dao;
+            $c = $this->Category_dao;
         }
         return $c;
     }
