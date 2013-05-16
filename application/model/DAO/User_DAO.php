@@ -80,28 +80,5 @@ class User_DAO{
          $utilisateur=$this->PDO->prepare("UPDATE user SET use_deleted=1 WHERE use_login=:a" );
          $utilisateur->execute(array(':a'=>$login));
     }
-    /**
-     * select d'un user via un objet
-     * @param Phase_metier $phase
-     * @return type
-     */
-    public function getUserByHistory (Phase_metier $phase){
-        $query='
-            SELECTuse_login, use_firstname, use_lastname, use_email, use_password, use_deleted, use_fk_group
-            FROM task
-            WHERE tas_phase_fk =:a';
-        $result = $this->pdo->prepare($query);
-        $result -> setFetchMode (PDO::FETCH_ASSOC);
-        $result -> execute(array(":a"=>$phase->getId()));
-        $return=array();
-        foreach ($result as $key => $row){
-            if(!isset($this->task_Liste[$row["tas_id"]])){
-                $this->task_Liste[$row["tas_id"]]=new Task_metier($row["tas_id"],$row["tas_description"],$row["tas_creation"],$row["tas_phase_fk"]);
-            }
-            $return[]= $this->task_Liste[$row["tas_id"]];
-        }
-          return $return;
-    }
-    
   }
 ?>
