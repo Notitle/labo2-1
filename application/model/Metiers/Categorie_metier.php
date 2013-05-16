@@ -19,14 +19,13 @@ class Categorie_metier extends Generic_metier
      */
     public function __construct($id, $nom, $parentid)
     {
-        $this->setName($nom);
-        $this->setId($id);
-        $this->parentCategory = Application::getDAOFactory()->getCategoryDao()->getCategoryById($parentid);
-
         $this->validationArray = array(
             "categorie" => array("required" => true, "type" => "string"),
             "id" => array("required" => true, "type" => "integer")
         );
+        $this->setName($nom);
+        $this->setId($id);
+        $this->parentCategory = Application::getDAOFactory()->getCategoryDao()->getCategoryById($parentid);
     }
 
     public function getCategorie()
@@ -36,7 +35,6 @@ class Categorie_metier extends Generic_metier
 
     public function setName($categ)
     {
-// Passe dans le validateur et prend une exception si erreur
         try
         {
             $this->isDataValid("categorie", $categ);
