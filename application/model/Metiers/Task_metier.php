@@ -11,7 +11,7 @@ class Task_metier extends Generic_metier
     private $id;
     private $tache;
     private $date;
-    private $categorie;
+    private $phase;
     private $etat;
     private $utilisateur;
     private $commentaire;
@@ -32,7 +32,7 @@ class Task_metier extends Generic_metier
         $this->setId($id);
         $this->setTache($tache);
         $this->setDate($date);
-        $this->categorie = Application::getDAOFactory()->getCategoryDao()->getCategoryById($catID);
+        $this->phase = Application::getDAOFactory()->getPhaseDao()->getPhaseById($catID);
         $this->history = Application::getDAOFactory()->gethistoryDao()->getHistoryByTask($this);
 
         $this->validationArray = array(
@@ -92,7 +92,12 @@ class Task_metier extends Generic_metier
 
     public function getCategory()
     {
-        return $this->categorie;
+        return $this->phase;
+    }
+    
+    public function save()
+    {
+        Application::getDAOFactory()->getTaskDao()->set($this);
     }
 
 }

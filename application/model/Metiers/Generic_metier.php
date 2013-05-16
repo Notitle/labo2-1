@@ -62,7 +62,7 @@ abstract class Generic_metier implements Metier_interface
         {
             throw $e;
         }
-    }
+    } 
 
 }
 
