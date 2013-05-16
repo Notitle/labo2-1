@@ -76,8 +76,8 @@ class Phase_DAO {
          $phase->execute(array(':a'=>$id));
     }
     
-    public function getPhaseByProject($project){
-        
+    public function getPhaseByProject(Phase_metier $project){
+        $query='SELECT * FROM phase WHERE pha_project_fk=:a'
     }
 
 }
