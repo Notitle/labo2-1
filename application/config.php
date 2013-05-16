@@ -1,8 +1,7 @@
 <?php
+
 $config = array(
     "PATH" => array(
-        
-        
         "base" => __DIR__,
         "model" => "model",
         "vue" => "view",
@@ -14,7 +13,7 @@ $config = array(
         "DAO" => "model/DAO",
         "metier" => "model/Metiers",
         "factory" => "model/Factories",
-        "domain" =>"labo2.nylgraphics.be"
+        "domain" => "labo2.nylgraphics.be"
     ),
     "DB" => array(
         "HOST" => "localhost",
@@ -23,8 +22,13 @@ $config = array(
         "DB" => "labo2"
     ),
     "MVC" => array(
-        "default_controller" =>"Connexion_controller",
-        "default_action" => "login"
+        "default_controller" => "Main_controller",
+        "default_action" => "main",
+        "ViewTag" => array(
+            "menu" => "layout/menu.phtml",
+            "loginForm" => "layout/Formulaires/loginForm.phtml"
+            
+        )
     )
 );
 ?>
