@@ -62,12 +62,12 @@ class Category_DAO
      */
     public function setCategory(categorie_metier $cm) {
         if ($cm->id != 0) {
-            $categorie = $this->PDO->prepare("UPDATE category SET can_name=:n, can_parent=:p, cat_deleted=:d WHERE cat_id=:a");
-            $categorie->execute(array(':a' => $cm->id, ':n' => $cm->name, ':p' => $cm->parent, ':d' => $cm->deleted));
+            $categorie = $this->PDO->prepare("UPDATE category SET cat_name=:n, cat_parent=:p WHERE cat_id=:a");
+            $categorie->execute(array(':a' => $cm->id, ':n' => $cm->nom, ':p' => $cm->parentCategory));
             $this->Category_Liste[$cm->id] = $cm;
         } else {
-            $categorie = $this->PDO->prepare("INSERT INTO category (cat_name,cat_parent,cat_deleted) VALUES (:n,:p,:d) WHERE cat_id=:a");
-            $categorie->execute(array(':a' => $cm->id, ':n' => $cm->name, ':p' => $cm->parent, ':d' => $cm->deleted));
+            $categorie = $this->PDO->prepare("INSERT INTO category (cat_name,cat_parent) VALUES (:n,:p) WHERE cat_id=:a");
+            $categorie->execute(array(':a' => $cm->id, ':n' => $cm->nom, ':p' => $cm->parentCategory));
             $this->Category_Liste[$cm->id] = $cm;
         }
     }
