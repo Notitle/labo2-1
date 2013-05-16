@@ -112,6 +112,24 @@ class Task_DAO
         }
           return $return;
     }
+   
+    /**A MODIFIER**/
+    public function getTaskByUser(Utilisateur_metier $user){
+        $query='SELECT his_task_fk FROM history WHERE his_user_fk=:a';
+        $result=$this->pdo->prepare($query);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        $result->execute(array(":a"=>$user->getIdentifiant()));
+        $return=array();
+        foreach ($result as $key => $row){
+            if(!isset($this->his_liste[$row["his_id"]])){
+                $this->his_liste[$row["his_id"]]=new Task_metier($row["tas_id"],$row["tas_description"],$row["tas_creation"],$row["tas_phase_fk"]);
+            }
+            $return[]= $this->task_Liste[$row["tas_id"]];
+        }
+          return $return;
+            
+        }
+ 
 
 }
 

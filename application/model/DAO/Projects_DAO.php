@@ -98,7 +98,7 @@ class Projects_DAO {
         $stmt->execute(array(":a" => $cat->getCategorie()));
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $return = array();
-        foreach ($result as $key => $row) {
+        foreach ($stmt as $key => $row) {
             if (!isset($this->project_liste[$row["pro_id"]])) {
                 $this->project_liste[$row["pro_id"]] = new Projet_metier
                         ($row["pro_id"], $row["pro_name"], $row["pro_category_fk"], $row["pro_deleted"]);
@@ -107,6 +107,7 @@ class Projects_DAO {
         }
         return $return;
     }
+   
 
 }
 

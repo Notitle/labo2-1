@@ -143,6 +143,9 @@ class Utilisateur_metier extends Generic_metier
         $this->group = Application::getDAOFactory()->getGroupDao()->getGroupById($group);
     }
 
-}
+    public function setTask($task){
+        $this->task= Application::getDAOFactory()->getTaskDao()->getTaskByUser($task);
+    }
+ }
 
 ?>
