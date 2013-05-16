@@ -88,22 +88,24 @@ class Projects_DAO {
      * Fonction affichant les projets correspandant à une catégorie
      * @param type $cat
      */
-    public function getProjectByCat($cat) {
-        if (!isset($this->project_liste[$cat])) {
+    public function getProjectByCat(Categorie_metier $cat) {
             $query = '
                     SELECT *
                     FROM project
-                    WHERE pro_category_fk = :a';
+                    WHERE pro_category_fk = :a
+                    ORDER BY pro_name DESC' ;
             $stmt = $this->pdo->prepare($query);
-            $stmt->execute(array(":a" => $cat));
+            $stmt->execute(array(":a" => $cat->getCategorie()));
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            $row = $stmt->fetch();
-            $this->project_liste[$cat] = new Projet_metier
+            $return=array();
+            foreach($result as $key =>$row){
+                if(!isset($this->project_liste[$row["pro_category_fk"]])){
+                     $this->project_liste[$row["pro_category_fk"]] = new Projet_metier
                     ($row["pro_id"], $row["pro_name"], $row["pro_category_fk"], $row["pro_deleted"]);
-        }
-        return $this->project_liste[$cat];
+                }
+                $return[]=$this->project_liste[$row["pro_category_fk"]];
+            }
+            return $return;
     }
-
 }
-
 ?>

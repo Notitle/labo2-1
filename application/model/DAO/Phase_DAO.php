@@ -75,6 +75,10 @@ class Phase_DAO {
          $phase=$this->PDO->prepare("DELETE FROM phase WHERE cat_id=:a" );
          $phase->execute(array(':a'=>$id));
     }
+    
+    public function getPhaseByProject($project){
+        
+    }
 
 }
 ?>
