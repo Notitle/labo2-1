@@ -7,7 +7,7 @@
 class Task_DAO
 {
 
-    private $dao;
+    private $pdo;
     private $task_Liste = array();
 
     public function __construct(MyPDO_DAO $mpdo)

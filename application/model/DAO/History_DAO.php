@@ -21,7 +21,11 @@ class History_DAO
 
         foreach ($result as $key => $row)
         {
-            $this->History_liste[$row['his_id']] = new History_metier($row['his_id'], $row['his_task_fk'], $row['his_time'], $row['his_description'], $row['his_comment'], $row['his_state'], $row['his_user_fk'], $row['his_blocking_fk']);
+            if (!isset($this->History_liste[$row['his_id']]))
+            {
+                $this->History_liste[$row['his_id']] = new History_metier();
+                $this->History_liste[$row['his_id']]->rempli($row['his_id'], $row['his_task_fk'], $row['his_time'], $row['his_description'], $row['his_comment'], $row['his_state'], $row['his_user_fk'], $row['his_blocking_fk']);
+            }
         }
         return $this->History_liste;
     }
@@ -58,7 +62,8 @@ class History_DAO
         {
             if (!isset($this->History_liste[$row["his_id"]]))
             {
-                $this->History_liste[$row["his_id"]] = new History_metier($row['his_id'], $row['his_task_fk'], $row['his_time'], $row['his_description'], $row['his_comment'], $row['his_state'], $row['his_user_fk'], $row['his_blocking_fk']);
+                $this->History_liste[$row['his_id']] = new History_metier();
+                $this->History_liste[$row['his_id']]->rempli($row['his_id'], $row['his_task_fk'], $row['his_time'], $row['his_description'], $row['his_comment'], $row['his_state'], $row['his_user_fk'], $row['his_blocking_fk']);
             }
             $return[] = $this->History_liste[$row["his_id"]];
         }
@@ -78,8 +83,8 @@ class History_DAO
             $stmt->execute(array(":a" => $id));
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $row = $stmt->fetch();
-            $this->History_liste[$id] = new History_metier
-                    ($row['his_id'], $row['his_task_fk'], $row['his_time'], $row['his_description'], $row['his_comment'], $row['his_state'], $row['his_user_fk'], $row['his_blocking_fk']);
+            $this->History_liste[$row['his_id']] = new History_metier();
+            $this->History_liste[$row['his_id']]->rempli($row['his_id'], $row['his_task_fk'], $row['his_time'], $row['his_description'], $row['his_comment'], $row['his_state'], $row['his_user_fk'], $row['his_blocking_fk']);
         }
         return $this->History_liste[$id];
     }
