@@ -20,7 +20,20 @@ class History_metier extends Generic_metier
     private $blockingTaskID;
     private $blockingTask;
 
-    public function __construct($id, $com, $desc, $state, $user, $date, $tache, $blocking)
+ 
+
+    /**
+     * Remplis l'objet
+     * @param type $id
+     * @param type $com
+     * @param type $desc
+     * @param type $state
+     * @param type $user
+     * @param type $date
+     * @param type $tache
+     * @param type $blocking
+     */
+    public function rempli($id, $tache, $date, $desc, $com, $state, $user, $blocking)
     {
         $this->setId($id);
         $this->setCommentaire($com);
@@ -31,33 +44,14 @@ class History_metier extends Generic_metier
         $this->setTaskID($tache);
         $this->setBlockingTaskID($blocking);
         $this->utilisateur = Application::getDAOFactory()->getUserDao()->getUserByLogin($this->utilisateurID);
-        $this->tache=Application::getDAOFactory()->getTaskDao()->getTaskById($this->tacheID);
-        $this->blockingTask=Application::getDAOFactory()->getTaskDao()->getTaskById($this->tacheID);
-        
-        $this->validationArray = array(
-            "id" => array("required" => true, "type" => "integer"),
-            "commentaire" => array("required" => true, "type" => "string"),
-            "description" => array("required" => true, "type" => "string"),
-            "state" => array("required" => true, "type" => "string"),
-            "utilisateur" => array("required" => true, "type" => "integer"),
-            "date" => array("required" => true),
-            "tache" => array("required" => true, "type" => "string"),
-            "state" => array("required" => true, "type" => "integer"),
-            "blockingTache" => array("required" => true, "type" => "integer"),
-        );
+        $this->tache = Application::getDAOFactory()->getTaskDao()->getTaskById($this->tacheID);
+        $this->blockingTask = Application::getDAOFactory()->getTaskDao()->getTaskById($this->blockingTaskID);
     }
 
     private function setId($data)
     {
-        try
-        {
-            $this->isDataValid("id", $data);
-            $this->id = $data;
-        }
-        Catch (Validateur_exception $e)
-        {
-            echo $e->getMessage();
-        }
+
+        $this->id = $data;
     }
 
     public function setCommentaire($data)
@@ -175,15 +169,22 @@ class History_metier extends Generic_metier
     {
         return $this->date;
     }
-    public function getUser(){
+
+    public function getUser()
+    {
         return $this->utilisateur;
     }
-    public function getTask(){
+
+    public function getTask()
+    {
         return $this->tache;
     }
-    public function getBlockingTask(){
+
+    public function getBlockingTask()
+    {
         return $this->blockingTask;
     }
+
 }
 
 ?>

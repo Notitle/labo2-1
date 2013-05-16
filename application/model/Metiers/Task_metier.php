@@ -90,7 +90,7 @@ class Task_metier extends Generic_metier
         return $this->history;
     }
 
-    public function getCategory()
+    public function getPhase()
     {
         return $this->phase;
     }

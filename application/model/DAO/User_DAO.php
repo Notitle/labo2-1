@@ -60,7 +60,7 @@ class User_DAO{
             $utilisateur->execute(array(':a' => $um->identifiant, ':f' => $um->prenom, ':l' => $um->nom, ':e' => $um->email, ':p' => $um->password));
             $this->user_liste[$um->identifiant] = $um;
         } else {
-            $utilisateur = $this->PDO->prepare("INSERT INTO category (use_login,use_firstname,use_lastname,use_email,use_password) VALUES (:a,:f,:l,:e,:p) WHERE use_login=:a");
+            $utilisateur = $this->PDO->prepare("INSERT INTO user (use_login,use_firstname,use_lastname,use_email,use_password) VALUES (:a,:f,:l,:e,:p) WHERE use_login=:a");
             $utilisateur->execute(array(':a' => $um->identifiant, ':f' => $um->prenom, ':l' => $um->nom, ':e' => $um->email, ':p' => $um->password));
             $this->user_liste[$um->identifiant] = $um;
         }
