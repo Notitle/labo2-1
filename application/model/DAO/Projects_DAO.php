@@ -51,5 +51,19 @@ class Projects_DAO {
         return $this->project_liste[$id];
     }
 
+    //update projet
+    public function setPoject(Projet_metier $pm){
+        if ($pm->id != 0) {
+            $project = $this->PDO->prepare("UPDATE project SET pro_name = :b, pro_categorie_fk = :c WHERE pro_id = :a");
+            $project->execute(array(':a' => $pm->id, ':b' => $pm->name,':c' => $pm->parentCategory));
+            $this->project_liste[$pm->$id] = $pm;
+        }
+        
+        else{
+            $project = $this->PDO->prepare("INSERT INTO project (pro_name, pro_categorie_fk) VALUES (:b, :c) WHERE pro_id = :a");
+            $project->execute(array(':a' => $pm->id, ':b' => $pm->name,':c' => $pm->parentCategory));
+            $this->project_liste[$pm->$id] = $pm;
+        }
+    }
 }
 ?>
