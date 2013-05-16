@@ -42,13 +42,13 @@ class Groupe_DAO {
 
             $query = '
                     SELECT *
-                    FROM group
+                    FROM `group` 
                     WHERE gro_id = :a ';
             $stmt = $this->pdo->prepare($query);
             $stmt->execute(array(":a" => $id));
             $stmt->setFetchMode(PDO::FETCH_ASSOC); //tableau associatif dna sla cariable $stmt
             $row = $stmt->fetch();
-            $this->Group_liste[$id] = new Groupe_metier($row['gro_id'], $row['gro_name']);
+            $this->Group_liste[$id] = new Group_metier($row['gro_id'], $row['gro_name']);
         }
         return $this->Group_liste[$id];
     }
