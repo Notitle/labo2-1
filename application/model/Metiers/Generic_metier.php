@@ -63,6 +63,29 @@ abstract class Generic_metier implements Metier_interface
             throw $e;
         }
     } 
+    
+    /**
+     * Ajoute une règle de validation à l'objet.
+     * @param String $name
+     * @param Array $array
+     * @throws Exception
+     */
+    protected function addValidationRule($name,$array)
+    {
+       if (!is_string($name))
+       {
+           throw new Exception("name doit être de type string");
+       }
+       foreach ($array as $element => $rule)
+       {
+           $enum = array("required","type","range","pattern");
+           if (!in_array($element, $enum))
+           {
+               throw new Exception("validateur non reconnu: " .$element);
+           }
+       }
+       $this->validationArray[$element] = $array;
+    }
 
 }
 
