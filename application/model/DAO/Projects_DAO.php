@@ -51,6 +51,7 @@ class Projects_DAO {
         }
         return $this->project_liste[$id];
     }
+    
 
     /**
      * ajout du Projet
