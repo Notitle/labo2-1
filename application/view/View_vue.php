@@ -55,18 +55,30 @@ class View_vue
         $repertoire = (string) $cont;
         $path = Application::getConfigPath();
 
+        $config = &Application::getConfigMVC();
+        $arrayTag = &$config['ViewTag'];
+
+        ob_start();
+        include($path["base"] . "/" . $path["vue"] . "/layout/generic.phtml");
+        $wrapper = ob_get_contents();
+        ob_end_clean();
+
         ob_start();
         include($path["base"] . "/" . $path["vue"] . "/" . $repertoire . "/" . $action . ".phtml");
         $contenu = ob_get_contents();
         ob_end_clean();
-
-        ob_start();
-        include($path["base"] . "/" . $path["vue"] . "/Layout/generic.phtml");
-        $wrapper = ob_get_contents();
-        ob_end_clean();
         
         $wrapper = preg_replace("/(\{content\})/", $contenu, $wrapper);
-        
+
+        foreach ($arrayTag as $key => $tag)
+        {
+            ob_start();
+            include($path["base"] . "/" . $path["vue"] . "/" . $tag);
+            $contenu = ob_get_contents();
+            ob_end_clean();
+
+            $wrapper = preg_replace("/(\{" . $key . "\})/", $contenu, $wrapper);
+        }
         echo $wrapper;
     }
 
