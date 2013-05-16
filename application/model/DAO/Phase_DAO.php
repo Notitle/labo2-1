@@ -77,7 +77,7 @@ class Phase_DAO {
     }
     
     public function getPhaseByProject(Phase_metier $project){
-        $query='SELECT * FROM phase WHERE pha_project_fk=:a'
+        $query='SELECT * FROM phase WHERE pha_project_fk=:a';
     }
 
 }
