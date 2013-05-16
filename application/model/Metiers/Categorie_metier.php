@@ -5,49 +5,63 @@
  *
  * @author sarah
  */
-class categorie_metier extends Generic_metier {
+class Categorie_metier extends Generic_metier
+{
 
-    private $categorie;
+    private $nom;
     private $id;
-    private $validationArray;
+    private $parentCategory;
 
     /**
      * Function construct
      * @param string $categorie - nom de la categorie
      * @param string $id - nom de l'id
      */
-    public function __construct($categorie, $id) {
-        $this->setCategorie($categorie);
+    public function __construct($id, $nom, $parentid)
+    {
+        $this->setName($nom);
         $this->setId($id);
+        $this->parentCategory = Application::getDAOFactory()->getCategoryDao()->getCategoryById($parentid);
+
         $this->validationArray = array(
             "categorie" => array("required" => true, "type" => "string"),
             "id" => array("required" => true, "type" => "integer")
         );
     }
 
-    public function getCategorie() {
+    public function getCategorie()
+    {
         return $this->categorie;
     }
 
-    public function setCategorie($categ) {
+    public function setName($categ)
+    {
 // Passe dans le validateur et prend une exception si erreur
-        try {
+        try
+        {
             $this->isDataValid("categorie", $categ);
-            $this->categorie = $categ;
-        } catch (Exception $e) {
+            $this->nom = $categ;
+        }
+        catch (Exception $e)
+        {
             $e->getMessage();
         }
     }
 
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
-    public function setId($id) {
-        try {
+    public function setId($id)
+    {
+        try
+        {
             $this->isDataValid("id", $id);
             $this->id = $id;
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             $e->getMessage();
         }
     }

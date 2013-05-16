@@ -18,6 +18,10 @@ class Task_controller implements Controller_interface
         );
         $vue->display($this, 'liste');
     }
+    
+    /*public function ajoutTasks(){
+        $vue = new View_vue($array);
+    }*/
 
     public function __toString()
     {
