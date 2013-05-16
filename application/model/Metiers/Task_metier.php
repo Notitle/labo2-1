@@ -94,6 +94,11 @@ class Task_metier extends Generic_metier
     {
         return $this->phase;
     }
+    
+    public function save()
+    {
+        Application::getDAOFactory()->getTaskDao()->set($this);
+    }
 
 }
 
