@@ -59,13 +59,13 @@ class Phase_DAO {
         }
         
         else{
-            $phase = $this->PDO->prepare("INSERT INTO (pha_name, pha_project_fk) VALUES (:b, :c) WHERE pha_id = :a");
+            $phase = $this->PDO->prepare("INSERT INTO phase (pha_name, pha_project_fk) VALUES (:b, :c) WHERE pha_id = :a");
             $phase->execute(array(':a' => $pm->id, ':b' => $pm->name,':c' => $pm->project_fk));
             $this->phase_liste[$pm->$id] = $pm;
         }
     }
     
-    public function deleteCategory ($id){
+    public function deletePhase ($id){
          if(isset ($this->phase_liste[$id])){
              unset($this->phase_liste[$id]);
          }
