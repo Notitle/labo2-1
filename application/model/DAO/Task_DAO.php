@@ -35,7 +35,11 @@ class Task_DAO
         }
         return $this->task_Liste; // !! ne pas oublier le return!! ;-)
     }
-
+    /**
+     * select d'une tache via un id
+     * @param type $id
+     * @return type
+     */
     public function getTaskById($id)
     {
 
@@ -54,7 +58,10 @@ class Task_DAO
         }
         return $this->task_Liste[$id];
     }
-    
+    /**
+     * modif/ajout d'une tache
+     * @param Task_metier $tm
+     */
     public function setTask(Task_metier $tm){
         if ($tm->id != 0) {
             $tache = $this->PDO->prepare("UPDATE task SET tas_description = :b, tas_creation = :c, tas_phase_fk = :d WHERE tas_id = :a");
@@ -68,7 +75,11 @@ class Task_DAO
             $this->task_liste[$tm->$id] = $tm;
         }
     }
-    
+    /**
+     * suppression d'une tâche
+     * @param type $id
+     * @return string
+     */
     public function deleteTask ($id){
          if(isset ($this->task_Liste[$id])){
              unset($this->task_Liste[$id]);
@@ -78,6 +89,28 @@ class Task_DAO
          }
          $task=$this->PDO->prepare("DELETE FROM task WHERE tas_id=:a" );
          $task->execute(array(':a'=>$id));
+    }
+    /**
+     * select d'une tache via l'objet phase
+     * @param Phase_metier $phase
+     * @return type
+     */
+    public function getTaskByPhase (Phase_metier $phase){
+        $query='
+            SELECT tas_id, tas_description, tas_creation, tas_phase_fk
+            FROM task
+            WHERE tas_phase_fk =:a';
+        $result = $this->pdo->prepare($query);
+        $result -> setFetchMode (PDO::FETCH_ASSOC);
+        $result -> execute(array(":a"=>$phase->getId()));
+        $return=array();
+        foreach ($result as $key => $row){
+            if(!isset($this->task_Liste[$row["tas_id"]])){
+                $this->task_Liste[$row["tas_id"]]=new Task_metier($row["tas_id"],$row["tas_description"],$row["tas_creation"],$row["tas_phase_fk"]);
+            }
+            $return[]= $this->task_Liste[$row["tas_id"]];
+        }
+          return $return;
     }
 
 }
