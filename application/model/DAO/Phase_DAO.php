@@ -53,15 +53,15 @@ class Phase_DAO {
     
     public function setPhase(Phase_metier $pm){
         if ($pm->id != 0) {
-            $phase = $this->PDO->prepare("UPDATE phase SET pha_name = :b, pha_project_fk = :c WHERE pha_id = :a");
-            $phase->execute(array(':a' => $pm->id, ':b' => $pm->name,':c' => $pm->project_fk));
-            $this->phase_liste[$pm->$id] = $pm;
+            $phase = $this->PDO->prepare("UPDATE phase SET pha_name = :b WHERE pha_id = :a");
+            $phase->execute(array(':a' => $pm->id, ':b' => $pm->name));
+            $this->phase_liste[$pm->id] = $pm;
         }
         
         else{
-            $phase = $this->PDO->prepare("INSERT INTO phase (pha_name, pha_project_fk) VALUES (:b, :c) WHERE pha_id = :a");
-            $phase->execute(array(':a' => $pm->id, ':b' => $pm->name,':c' => $pm->project_fk));
-            $this->phase_liste[$pm->$id] = $pm;
+            $phase = $this->PDO->prepare("INSERT INTO phase (pha_name) VALUES (:b) WHERE pha_id = :a");
+            $phase->execute(array(':a' => $pm->id, ':b' => $pm->name));
+            $this->phase_liste[$pm->id] = $pm;
         }
     }
     
@@ -72,7 +72,7 @@ class Phase_DAO {
          else{
              return "La phase n'existe pas, Nom d'un chien ! Le capitaine Jérôme a encore bu trop de Whisky !!!!!!!!!!!!!!!!!! !";
          }
-         $phase=$this->PDO->prepare("DELETE FROM phase WHERE cat_id=:a" );
+         $phase=$this->PDO->prepare("DELETE FROM phase WHERE pha_id=:a" );
          $phase->execute(array(':a'=>$id));
     }
 
