@@ -50,6 +50,31 @@ class Phase_DAO {
         }
         return $this->phase_liste[$id];
     }
+    
+    public function setPhase(Phase_metier $pm){
+        if ($pm->id != 0) {
+            $phase = $this->PDO->prepare("UPDATE phase SET pha_name = :b, pha_project_fk = :c WHERE pha_id = :a");
+            $phase->execute(array(':a' => $pm->id, ':b' => $pm->name,':c' => $pm->project_fk));
+            $this->phase_liste[$pm->$id] = $pm;
+        }
+        
+        else{
+            $phase = $this->PDO->prepare("INSERT INTO (pha_name, pha_project_fk) VALUES (:b, :c) WHERE pha_id = :a");
+            $phase->execute(array(':a' => $pm->id, ':b' => $pm->name,':c' => $pm->project_fk));
+            $this->phase_liste[$pm->$id] = $pm;
+        }
+    }
+    
+    public function deleteCategory ($id){
+         if(isset ($this->phase_liste[$id])){
+             unset($this->phase_liste[$id]);
+         }
+         else{
+             return "La phase n'existe pas, Nom d'un chien ! Le capitaine Jérôme a encore bu trop de Whisky !!!!!!!!!!!!!!!!!! !";
+         }
+         $phase=$this->PDO->prepare("DELETE FROM phase WHERE cat_id=:a" );
+         $phase->execute(array(':a'=>$id));
+    }
 
 }
 ?>
