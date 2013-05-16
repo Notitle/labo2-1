@@ -13,7 +13,6 @@ class Utilisateur_metier extends Generic_metier
     private $prenom;
     private $password;
     private $email;
-
     private $group;
 
     /**
@@ -24,7 +23,7 @@ class Utilisateur_metier extends Generic_metier
      * @param string $password - password de l'user
      * @param string $email - email de l'user
      */
-    public function __construct($identifiant = null, $nom = null, $prenom = null, $email = null, $password = null, $deleted = null, $group = null)
+    public function __construct($identifiant = null, $prenom = null, $nom = null, $email = null, $password = null, $deleted = null, $group = null)
     {
         $this->setIdentifiant($identifiant);
         $this->setNom($nom);
@@ -71,7 +70,7 @@ class Utilisateur_metier extends Generic_metier
         try
         {
             $this->isDataValid("nom", $name);
-            $this->identifiant = $name;
+            $this->nom = $name;
         }
         catch (Exception $e)
         {
@@ -143,9 +142,11 @@ class Utilisateur_metier extends Generic_metier
         $this->group = Application::getDAOFactory()->getGroupDao()->getGroupById($group);
     }
 
-    public function setTask($task){
-        $this->task= Application::getDAOFactory()->getTaskDao()->getTaskByUser($task);
+    public function getTasks()
+    {
+        return Application::getDAOFactory()->getTaskDao()->getTasksByUser($this);
     }
- }
+
+}
 
 ?>

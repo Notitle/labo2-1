@@ -28,6 +28,14 @@ class Connexion_controller implements Controller_interface
         
         var_dump($history2[0]->getTask()->getPhase()->getName());
         echo "<br />";
+        
+        $user = Application::getDAOFactory()->getUserDao()->getUserByLogin('nyl');
+        
+        $table = $user->getTasks();
+        
+        $fucking_history = $table[0]->getHistory();
+        
+        var_dump($fucking_history[0]->getDate());
 
 
         $vue = new View_vue(array());
