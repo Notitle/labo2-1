@@ -1,15 +1,18 @@
 <?php
 
 /**
- * Description of Vue_vue
- *
- * @author internet06
+ * Objet de génération de la vue
+ * @author loic
  */
 class View_vue
 {
 
     private $dataVue = array();
 
+    /**
+     * Objet de génération de la vue
+     * @param Array $array les variables à passer à la vue
+     */
     public function __construct($array)
     {
         foreach ($array as $element)
@@ -18,16 +21,34 @@ class View_vue
         }
     }
 
+    /**
+     * Renvoie la valeur correspondante
+     * @param String $nom
+     * @return mixed
+     */
     public function getDatavue($nom)
     {
         return $this->dataVue[$nom];
     }
 
-    public function setDatavue($nom, $valeur)
+    /**
+     * Utilisé dans le constructeur, remplis l'objet avec les parametres à passer aux templates
+     * @param String $nom
+     * @param Mixed $valeur
+     * @access private
+     */
+    private function setDatavue($nom, $valeur)
     {
         $this->dataVue[$nom] = $valeur;
     }
 
+    /**
+     * Affiche le template associé au controller.
+     * @param Controller_interface $cont
+     * @param String $action
+     * @throws Exception
+     * @deprecated : Utilisez combine à la place
+     */
     public function display($cont, $action)
     {
         $repertoire = (string) $cont;
@@ -39,6 +60,11 @@ class View_vue
         require_once($path["base"] . "/" . $path["vue"] . "/" . $repertoire . "/" . $action . ".phtml");
     }
 
+    /**
+     * Génère une URL valable
+     * @param type $array
+     * @return string
+     */
     public function url($array)
     {
         $path = Application::getConfigPath();
@@ -50,6 +76,11 @@ class View_vue
         return $buffer;
     }
 
+    /**
+     * Combine les fichiers de templates pour afficher la page correspondante au controller et à l'action demandée
+     * @param Controller_interface $cont
+     * @param type $action
+     */
     public function combine($cont, $action)
     {
         $repertoire = (string) $cont;
