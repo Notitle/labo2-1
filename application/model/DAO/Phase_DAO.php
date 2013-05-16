@@ -76,8 +76,27 @@ class Phase_DAO {
          $phase->execute(array(':a'=>$id));
     }
     
-    public function getPhaseByProject(Phase_metier $project){
+    /**
+     * Function contenant les phases par projets
+     * @param Projet_metier $project
+     * @return type
+     */
+    
+    public function getPhaseByProject(Projet_metier $project){
         $query='SELECT * FROM phase WHERE pha_project_fk=:a';
+        $result = $this->pdo->prepare($query);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        $result->execute(array(":a" => $project->getId()));
+        $return = array();
+        foreach ($result as $key => $row)
+        {
+            if (!isset($this->phase_liste[$row['pha_id']]))
+            {
+                $this->phase_liste[$row["pha_id"]] = new Phase_metier($row['pha_id'], $row['pha_name'], $row['pha_project_fk']);
+            }
+            $return[] = $this->phase_liste[$row["pha_id"]];
+        }
+        return $return;
     }
 
 }
