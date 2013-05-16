@@ -57,7 +57,6 @@ class Projects_DAO {
      * @param categorie_metier $cm
      * 
      */
-    
     public function setProject(projet_metier $pm) {
         if ($pm->id != 0) {
             $project = $this->PDO->prepare("UPDATE project SET pro_name=:n WHERE pro_id=:a");
@@ -83,6 +82,26 @@ class Projects_DAO {
         }
         $project = $this->PDO->prepare("UPDATE project SET pro_deleted=1 WHERE pro_id=:a");
         $project->execute(array(':a' => $id));
+    }
+
+    /**
+     * Fonction affichant les projets correspandant à une catégorie
+     * @param type $cat
+     */
+    public function getProjectByCat($cat) {
+        if (!isset($this->project_liste[$cat])) {
+            $query = '
+                    SELECT *
+                    FROM project
+                    WHERE pro_category_fk = :a';
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute(array(":a" => $cat));
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $row = $stmt->fetch();
+            $this->project_liste[$cat] = new Projet_metier
+                    ($row["pro_id"], $row["pro_name"], $row["pro_category_fk"], $row["pro_deleted"]);
+        }
+        return $this->project_liste[$cat];
     }
 
 }
