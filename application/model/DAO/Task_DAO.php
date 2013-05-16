@@ -55,7 +55,33 @@ class Task_DAO
         return $this->task_Liste[$id];
     }
     
+    public function setTask(Task_metier $tm){
+        if ($tm->id != 0) {
+            $tache = $this->PDO->prepare("UPDATE task SET tas_description = :b, tas_creation = :c, tas_phase_fk = :d WHERE tas_id = :a");
+            $tache->execute(array(':a' => $tm->id, ':b' => $tm->tache,':c' => $tm->date, ':d' => $tm->phase));
+            $this->task_liste[$tm->$id] = $tm;
+        }
+        
+        else{
+            $tache = $this->PDO->prepare("INSERT INTO task (tas_description, tas_creation, tas_phase_fk) VALUES (:b, :c, :d) WHERE pha_id = :a");
+            $tache->execute(array(':a' => $tm->id, ':b' => $tm->tache,':c' => $tm->date, ':d' => $tm->phase));
+            $this->task_liste[$tm->$id] = $tm;
+        }
+    }
     
+    public function deleteTask ($id){
+         if(isset ($this->task_Liste[$id])){
+             unset($this->task_Liste[$id]);
+         }
+         else{
+             return "La tâche n'existe pas, Nom d'un chien ! Le capitaine Jérôme a encore bu trop de Whisky !!!!!!!!!!!!!!!!!! !";
+         }
+         $task=$this->PDO->prepare("DELETE FROM task WHERE tas_id=:a" );
+         $task->execute(array(':a'=>$id));
+    }
+
 }
 
 ?>
+
+ 	
