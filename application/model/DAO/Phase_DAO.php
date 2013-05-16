@@ -65,7 +65,7 @@ class Phase_DAO {
         }
     }
     
-    public function deleteCategory ($id){
+    public function deletePhase ($id){
          if(isset ($this->phase_liste[$id])){
              unset($this->phase_liste[$id]);
          }
