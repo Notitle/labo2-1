@@ -2,8 +2,23 @@ body{
     font: 16px Helvetica, arial, freesans, clean, sans-serif;
 }
 
-hr{
-    margin-top: -10px;
+hr {
+    display: block;
+    clear: both;
+    height: 0;
+    margin: -10px 0 20px;
+    padding: 0;
+    border: 0;
+    font-family: arial;
+    text-align: left;
+    font-size: 20px;
+    line-height: 1;
+}
+hr:after {
+    content: "\273D \273D \273D \273D \273D \273D \273D \273D \273D\273D \273D \273D \273D \273D\273D \273D \273D\273D \273D \273D ";
+    height: 0;			
+    letter-spacing: 0.2em;
+    color: #E900F9;
 }
 
 
