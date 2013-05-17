@@ -5,7 +5,7 @@ body{
 }
 
 hr{
-    
+    margin-top: -10px;
 }
 
 
@@ -38,4 +38,13 @@ a{
 
 #comments{
     font-size: 12px;
+}
+
+.Input1{
+    
+}
+
+
+.Input2{
+    
 }

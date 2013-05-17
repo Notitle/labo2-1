@@ -13,23 +13,7 @@
             <div id="connec">
                 <h3>Connexion</h3>
                 <hr />
-                <form action="" method="post">
-                    <table>
-                        <tr>
-                            <td>Nom d'utilisateur </td>  <td> <input type="text" maxlength="50" name="login"> </td>
-                        </tr>
-
-                        <tr>
-                            <td>Mot de passe </td>  <td>  <input type="text" maxlength="50" name="pdw"></td>
-                        </tr>
-
-                        <tr>
-                            <td> <input  type="submit" value="Validez"  />  </td>
-                        </tr>
-                    </table>
-                </form>
-                
-                
+                <br />
                 <?php
                     $form = new Form_vue($this->getDatavue("form"));
                     echo $form->getHTML();
