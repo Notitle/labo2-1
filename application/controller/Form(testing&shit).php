@@ -17,7 +17,11 @@ abstract class Form {
     public function __construct(Entity $entity) {
         $this->setEntity($entity);
     }
-
+    /**
+     * stockage
+     * @param Field $field
+     * @return \Field
+     */
     public function add(Field $field) {
         $attr = $field->getname(); /* recup le nom du champ */
         $field->setValue($this->entity->$attr()); /* on lui colle la valeur */
@@ -25,7 +29,10 @@ abstract class Form {
         $this->fields_liste[] = $field;
         return $field;
     }
-
+    /**
+     * vue (finir dans classe fille)
+     * @return string
+     */
     public function createView() {
         $view = '';
 
@@ -35,11 +42,13 @@ abstract class Form {
 
         return $view;
     }
-
+    /**
+     * 
+     */
     public function isValid() {
         /* no idea */
     }
-
+    
     public function entity() {
         return $this->entity;
     }
