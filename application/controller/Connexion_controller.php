@@ -24,6 +24,7 @@ class Connexion_controller implements Controller_interface
 
         $vue = new View_vue(array("form" => new Generic_form("formulaire", "", Generic_form::METHOD_POST)));
         $vue->display($this, "login");
+                
     }
 
 }

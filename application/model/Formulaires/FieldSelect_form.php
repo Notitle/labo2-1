@@ -19,8 +19,8 @@ class FieldSelect_form extends Field_form {
         return $this->options;
     }
 
-    public function setOption_liste($option_liste) {
-        $this->options = $option_liste;
+    public function setOption_liste($options) {
+        $this->options = $options;
     }
 }
 
