@@ -2,8 +2,8 @@
 
 /**
  * Classe reprennant categorie_metier
- *
- * @author sarah
+ * @author sarah (Rangé et commenté par loic <3)
+ * 
  */
 class Categorie_metier extends Generic_metier
 {
@@ -27,17 +27,34 @@ class Categorie_metier extends Generic_metier
         $this->setId($id);
     }
 
-    public function getCategorie()
+    /**
+     * Retourne la catégorie parents
+     * @return String
+     */
+    public function getParentCategory()
     {
-        return $this->categorie;
+        return $this->parentCategory;
     }
 
-    public function setName($categ)
+    /**
+     * Retourn le nom de la catégorie
+     * @return type
+     */
+    public function getName()
+    {
+        return $this->nom;
+    }
+    
+    /**
+     * Défini le nom de la catégorie
+     * @param String $name
+     */
+    public function setName($name)
     {
         try
         {
-            $this->isDataValid("categorie", $categ);
-            $this->nom = $categ;
+            $this->isDataValid("categorie", $name);
+            $this->nom = $name;
         }
         catch (Exception $e)
         {
@@ -45,11 +62,19 @@ class Categorie_metier extends Generic_metier
         }
     }
 
+    /**
+     * Retourne l'ID de la catégorie
+     * @return type
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * Défini l'id de la catégorie
+     * @param integer $id
+     */
     public function setId($id)
     {
         try
