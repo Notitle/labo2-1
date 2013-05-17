@@ -121,15 +121,7 @@ class Utilisateur_metier extends Generic_metier
 
     public function setEmail($mail)
     {
-        try
-        {
-            $this->isDataValid("email", $mail);
-            $this->email = $mail;
-        }
-        catch (Exception $e)
-        {
-            $e->getMessage();
-        }
+        $this->email = $mail;
     }
 
     public function getGroup()
@@ -145,6 +137,11 @@ class Utilisateur_metier extends Generic_metier
     public function getTasks()
     {
         return Application::getDAOFactory()->getTaskDao()->getTasksByUser($this);
+    }
+    
+    public function save()
+    {
+        Application::getDAOFactory()->getUserDao()->setUser($this);
     }
 
 }
