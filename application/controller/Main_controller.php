@@ -1,4 +1,5 @@
 <?php
+
 class Main_controller implements Controller_interface
 {
 
@@ -14,11 +15,18 @@ class Main_controller implements Controller_interface
 
     public function defaultAction()
     {
-        $vue = new View_vue(array('ok' => "hello User !"));
-        $vue->combine($this, "main");
-    }
-    
 
+        if (!isset($_SESSION['user']))
+        {
+            $c = new Connexion_controller();
+            $c->defaultAction();
+        }
+        else
+        {
+            echo "Vous etes connecté";
+        }
+    }
 
 }
+
 ?>

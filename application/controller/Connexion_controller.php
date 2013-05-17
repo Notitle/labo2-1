@@ -3,11 +3,6 @@
 class Connexion_controller implements Controller_interface
 {
 
-    public function __construct()
-    {
-        
-    }
-
     public function __toString()
     {
         return "Connexion";
@@ -18,7 +13,7 @@ class Connexion_controller implements Controller_interface
         $this->login();
     }
 
-   public function login()
+    public function login()
     {
        
        $form = new Generic_form("connect","",Generic_form::METHOD_POST);
