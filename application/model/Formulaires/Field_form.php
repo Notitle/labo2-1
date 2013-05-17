@@ -9,11 +9,14 @@ class Field_form
     private $id;
     private $class;
     private $type;
-    function __construct($name, $value, $type)
+    private $label;
+            
+    function __construct($name, $value, $type, $label = null)
     {
         $this->name = $name;
         $this->value = $value;
         $this->type = $type;
+        $this->label = $label;
     }
 
     protected function addValidationRule($name, $array)
@@ -87,6 +90,15 @@ class Field_form
     {
         $this->type = $type;
     }
+    
+    public function getLabel() {
+        return $this->label;
+    }
+
+    public function setLabel($label) {
+        $this->label = $label;
+    }
+
 
 }
 
