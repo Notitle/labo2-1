@@ -9,7 +9,7 @@ class Field_form
     private $id;
     private $class;
     private $type;
-    function __construct($name, $value, $id, $class, $type)
+    function __construct($name, $value, $type)
     {
         $this->name = $name;
         $this->value = $value;
