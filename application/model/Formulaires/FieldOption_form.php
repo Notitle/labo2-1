@@ -7,7 +7,10 @@
  */
 class FieldOption_form extends FieldSelect_form {
     private $option_liste=array();
-    
+    /**
+     * constructeur
+     * @param type $valueOption
+     */        
     function __construct($valueOption) {
         parent::__construct($valueOption,"option");
         $this->option_liste = $valueOption;
@@ -16,7 +19,11 @@ class FieldOption_form extends FieldSelect_form {
     public function getValueOption() {
         return $this->option_liste;
     }
-
+    /**
+     *  tableau d'objet ->options
+     * @param type $valueOption
+     * @return type
+     */
     public function setValueOption($valueOption) {
         
         foreach ($valueOption as $value) {

@@ -9,7 +9,11 @@ class FieldSelect_form extends Field_form {
 
     private $options;
     
-
+    /**
+     * constructeur
+     * @param type $name
+     * @param type $options
+     */
     function __construct($name, $options) {
         parent::__construct($name, $options, "select");
         $this->options = $options;
