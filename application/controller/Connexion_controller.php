@@ -20,7 +20,7 @@ class Connexion_controller implements Controller_interface
 
    public function login()
     {
-        $vue = new View_vue(array("test" => "okokokok"));
+        $vue = new View_vue(array("form" => new Generic_form("formulaire", "", Generic_form::METHOD_POST)));
         $vue->display($this, "login");
     }
 

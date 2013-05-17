@@ -13,6 +13,7 @@ $config = array(
         "DAO" => "model/DAO",
         "metier" => "model/Metiers",
         "factory" => "model/Factories",
+        "form" => "model/Formulaires",
         "domain" => "labo2.nylgraphics.be"
     ),
     "DB" => array(
