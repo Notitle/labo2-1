@@ -27,13 +27,25 @@ abstract class Form {
     }
 
     public function createView() {
-        $view = ''; 
+        $view = '';
 
         foreach ($this->fields as $field) {
             $view .= $field->buildMyForm() . '<br />';
         } //fct appellée chez les class filles (type/valeur/validateur?)
-        
+
         return $view;
+    }
+
+    public function isValid() {
+        /* no idea */
+    }
+
+    public function entity() {
+        return $this->entity;
+    }
+
+    public function setEntity(Entity $entity) {
+        $this->entity = $entity;
     }
 
 }
