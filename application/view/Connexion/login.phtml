@@ -28,6 +28,12 @@
                         </tr>
                     </table>
                 </form>
+                
+                
+                <?php
+                    $form = new Form_vue($this->getDatavue("form"));
+                    echo $form->getHTML();
+                ?>
             </div>
         </div>
     </body>
