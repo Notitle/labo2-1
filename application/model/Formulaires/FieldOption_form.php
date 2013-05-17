@@ -6,36 +6,21 @@
  * @author internet07
  */
 class FieldOption_form extends FieldSelect_form {
-    private $option_liste=array();
+
+    private $option_liste = array();
     private $ValueOption;
     private $isSelected;
-    
+
     /**
      * constructeur
      * @param type $valueOption
-     */        
-    function __construct($valueOption) {
-        parent::__construct($valueOption,$isSelected,"option");
-        $this->option_liste = $valueOption;
-        $this->isSelected=$isSelected;
-    }
-    
-    public function getValueOption() {
-        return $this->option_liste;
-    }
-    /**
-     *  tableau d'objet ->options
-     * @param type $valueOption
-     * @return type
      */
-    public function setValueOption($valueOption) {
-        
-        foreach ($valueOption as $value) {
-            $this->option_liste[] = $value;
-
-        }
-        return $$this->option_liste;
+    function __construct($valueOption) {
+        parent::__construct($valueOption, $isSelected, "option");
+        $this->option_liste = $valueOption;
+        $this->isSelected = $isSelected;
     }
+
     public function getIsSelected() {
         return $this->isSelected;
     }
@@ -44,8 +29,24 @@ class FieldOption_form extends FieldSelect_form {
         $this->isSelected = $isSelected;
     }
 
+    public function getOption_liste() {
+        return $this->option_liste;
+    }
 
+    public function setOption_liste($option_liste) {
+        foreach ($option_liste as $value) {
+            $this->option_liste[] = $value;
+        }
+        return $this->option_liste;
+    }
 
+    public function getValueOption() {
+        return $this->ValueOption;
+    }
+
+    public function setValueOption($ValueOption) {
+        $this->ValueOption = $ValueOption;
+    }
 
 //selected
 }
