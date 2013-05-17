@@ -69,7 +69,6 @@ class User_DAO
         $query = "SELECT true FROM user WHERE use_login = :a";
         $result = $this->pdo->prepare($query);
         $result->execute(array(":a" => $login));
-        var_dump($um->getEmail());
 
         if ($result->rowCount() != 0)
         {
