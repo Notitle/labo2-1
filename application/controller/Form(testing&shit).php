@@ -1,23 +1,41 @@
 <?php
-abstract class FormBuilder
-{
-  protected $form;
-   
-  public function __construct(Entity $entity)
-  {
-    $this->setForm(new Form($entity));
-  }
-   
-  abstract public function build();
-   
-  public function setForm(Form $form)
-  {
-    $this->form = $form;
-  }
-   
-  public function form()
-  {
-    return $this->form;
-  }
+
+/**
+ * la class form doit pouvoir : 
+ *  -stocker les champs
+ *  -stocker une entité 'formulaire'
+ *  -recuperer l'entité dans un construct ?
+ *  -methode ajout de champ
+ *  -methode generer form
+ *  -methode validation
+ */
+abstract class Form {
+
+    protected $entity;
+    protected $fields_liste;
+
+    public function __construct(Entity $entity) {
+        $this->setEntity($entity);
+    }
+
+    public function add(Field $field) {
+        $attr = $field->getname(); /* recup le nom du champ */
+        $field->setValue($this->entity->$attr()); /* on lui colle la valeur */
+
+        $this->fields_liste[] = $field;
+        return $field;
+    }
+
+    public function createView() {
+        $view = ''; 
+
+        foreach ($this->fields as $field) {
+            $view .= $field->buildMyForm() . '<br />';
+        } //fct appellée chez les class filles (type/valeur/validateur?)
+        
+        return $view;
+    }
+
 }
+
 ?>
