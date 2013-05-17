@@ -7,13 +7,17 @@
  */
 class FieldOption_form extends FieldSelect_form {
     private $option_liste=array();
+    private $ValueOption;
+    private $isSelected;
+    
     /**
      * constructeur
      * @param type $valueOption
      */        
     function __construct($valueOption) {
-        parent::__construct($valueOption,"option");
+        parent::__construct($valueOption,$isSelected,"option");
         $this->option_liste = $valueOption;
+        $this->isSelected=$isSelected;
     }
     
     public function getValueOption() {
@@ -28,9 +32,18 @@ class FieldOption_form extends FieldSelect_form {
         
         foreach ($valueOption as $value) {
             $this->option_liste[] = $value;
+
         }
         return $$this->option_liste;
     }
+    public function getIsSelected() {
+        return $this->isSelected;
+    }
+
+    public function setIsSelected($isSelected) {
+        $this->isSelected = $isSelected;
+    }
+
 
 
 
